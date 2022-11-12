@@ -1,0 +1,12 @@
+D:\Documents\Visual Studio 2022\Projects\DrShop\Domain\bin\Debug\net6.0\Domain.deps.json
+D:\Documents\Visual Studio 2022\Projects\DrShop\Domain\bin\Debug\net6.0\Domain.dll
+D:\Documents\Visual Studio 2022\Projects\DrShop\Domain\bin\Debug\net6.0\Domain.pdb
+D:\Documents\Visual Studio 2022\Projects\DrShop\Domain\obj\Debug\net6.0\Domain.csproj.AssemblyReference.cache
+D:\Documents\Visual Studio 2022\Projects\DrShop\Domain\obj\Debug\net6.0\Domain.GeneratedMSBuildEditorConfig.editorconfig
+D:\Documents\Visual Studio 2022\Projects\DrShop\Domain\obj\Debug\net6.0\Domain.AssemblyInfoInputs.cache
+D:\Documents\Visual Studio 2022\Projects\DrShop\Domain\obj\Debug\net6.0\Domain.AssemblyInfo.cs
+D:\Documents\Visual Studio 2022\Projects\DrShop\Domain\obj\Debug\net6.0\Domain.csproj.CoreCompileInputs.cache
+D:\Documents\Visual Studio 2022\Projects\DrShop\Domain\obj\Debug\net6.0\Domain.dll
+D:\Documents\Visual Studio 2022\Projects\DrShop\Domain\obj\Debug\net6.0\refint\Domain.dll
+D:\Documents\Visual Studio 2022\Projects\DrShop\Domain\obj\Debug\net6.0\Domain.pdb
+D:\Documents\Visual Studio 2022\Projects\DrShop\Domain\obj\Debug\net6.0\ref\Domain.dll
