@@ -24,6 +24,7 @@ namespace DrShop.Controllers
             HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Index","Home");
         }
+        [Route("/Login")]
         public IActionResult LogIn()
         {
             return View();

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "rUdi8kgO4Robvl0YBb41tGU1iQMmNYVZ+Z+HeuvHGH8=",
+  "Hash": "+uLQLQiMy9UGmQANEhvBUL59Du7gHv0atYeOLdsU7Og=",
   "Source": "DrShop",
   "BasePath": "_content/DrShop",
   "Mode": "Default",
@@ -66,6 +66,40 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\site.css"
+    },
+    {
+      "Identity": "D:\\Documents\\Visual Studio 2022\\Projects\\DrShop\\DrShop\\wwwroot\\Errors\\script.js",
+      "SourceId": "DrShop",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Documents\\Visual Studio 2022\\Projects\\DrShop\\DrShop\\wwwroot\\",
+      "BasePath": "_content/DrShop",
+      "RelativePath": "Errors/script.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Errors\\script.js"
+    },
+    {
+      "Identity": "D:\\Documents\\Visual Studio 2022\\Projects\\DrShop\\DrShop\\wwwroot\\Errors\\style.css",
+      "SourceId": "DrShop",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Documents\\Visual Studio 2022\\Projects\\DrShop\\DrShop\\wwwroot\\",
+      "BasePath": "_content/DrShop",
+      "RelativePath": "Errors/style.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Errors\\style.css"
     },
     {
       "Identity": "D:\\Documents\\Visual Studio 2022\\Projects\\DrShop\\DrShop\\wwwroot\\favicon.ico",

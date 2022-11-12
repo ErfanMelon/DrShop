@@ -25,10 +25,16 @@ namespace DrShop.Controllers
             return View();
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+
+        [Route("/Error/{statusCode}")]
+        public IActionResult ErrorHandler(int statusCode)
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            switch (statusCode)
+            {
+                default:
+                    return View();
+                    break;
+            }
         }
     }
 }

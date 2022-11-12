@@ -1,0 +1,103 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="Icon Name Here !" type="image/x-icon">
+    <link href="~/errors/style.css" rel="stylesheet" />
+    <title>Dr.Shop</title>
+</head>
+
+<body>
+
+    <div class="about">
+        <a class="bg_links social portfolio" href="Https://www.Dr.Shop.ir" target="_blank">
+            <span class="icon"></span>
+        </a>
+        <a class="bg_links social dribbble" href="Https://t.me/Dr.Shop" target="_blank">
+            <span class="icon"></span>
+        </a>
+        <a class="bg_links social linkedin" href="Https://www.instagram.Com/Dr.Shop" target="_blank">
+            <span class="icon"></span>
+        </a>
+        <a class="bg_links logo"></a>
+    </div>
+
+    <nav>
+        <div class="menu">
+            <p class="website_name">Dr.Shop</p>
+            <div class="menu_links">
+                <a href="" class="link">About Us</a>
+                <a asp-controller="Account" asp-action="Login" class="link">Log In</a>
+                <a asp-controller="Account" asp-action="Login" class="link">Sign Up</a>
+            </div>
+            <div class="menu_icon">
+                <span class="icon"></span>
+            </div>
+        </div>
+    </nav>
+
+    <section class="wrapper">
+        <div class="container">
+            <div id="scene" class="scene" data-over-only="false">
+
+                <div class="circle" data-depth="1.2"></div>
+
+                <div class="one" data-depth="0.9">
+                    <div class="content">
+                        <span class="piece"></span>
+                        <span class="piece"></span>
+                        <span class="piece"></span>
+                    </div>
+                </div>
+
+                <div class="two" data-depth="0.60">
+                    <div class="content">
+                        <span class="piece"></span>
+                        <span class="piece"></span>
+                        <span class="piece"></span>
+                    </div>
+                </div>
+
+                <div class="three" data-depth="0.40">
+                    <div class="content">
+                        <span class="piece"></span>
+                        <span class="piece"></span>
+                        <span class="piece"></span>
+                    </div>
+                </div>
+
+
+                <p class="p404" data-depth="0.50">404</p>
+                <p class="p404" data-depth="0.10">404</p>
+
+            </div>
+
+
+            <div class="text">
+                <article>
+                    <p>اوه اوه! انگار گم شدی <br>اگر تمایل دارید به صفحه اصلی برگردید ، بر روی دکمه زیر کلیک کنید!</p>
+                    <form action="/" method="post"><button type="submit">خانه</button></form>
+                </article>
+            </div>
+
+        </div>
+    </section>
+
+
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+    
+    <script src="~/errors/script.js"></script>
+</body>
+
+</html>
