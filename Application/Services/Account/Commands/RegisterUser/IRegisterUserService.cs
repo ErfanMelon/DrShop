@@ -12,7 +12,7 @@ namespace Application.Services.Account.Commands.RegisterUser
 {
     public interface IRegisterUserService
     {
-        ResultDto Execute(RegisterUserDto request);
+        ResultDto<int> Execute(RegisterUserDto request);
     }
     public class RegisterUserValidation : AbstractValidator<RegisterUserDto>
     {
@@ -49,12 +49,12 @@ namespace Application.Services.Account.Commands.RegisterUser
             _validationRules = validationRules;
         }
 
-        public ResultDto Execute(RegisterUserDto request)
+        public ResultDto<int> Execute(RegisterUserDto request)
         {
             var validation = _validationRules.Validate(request);
             if (!validation.IsValid)
             {
-                return new ResultDto { Messege = validation.Errors[0].ErrorMessage };
+                return new ResultDto<int> { Messege = validation.Errors[0].ErrorMessage };
             }
 
             User newUser = new User();
@@ -65,7 +65,7 @@ namespace Application.Services.Account.Commands.RegisterUser
             newUser.Password = hasher.HashPassword(request.Password);
             _context.Users.Add(newUser);
             _context.SaveChanges();
-            return new ResultDto { IsSuccess = true, Messege = "ثبت نام شدید" };
+            return new ResultDto<int> { Data=newUser.UserId, IsSuccess = true, Messege = "ثبت نام شدید" };
         }
     }
 }

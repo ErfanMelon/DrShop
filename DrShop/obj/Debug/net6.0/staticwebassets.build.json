@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "+uLQLQiMy9UGmQANEhvBUL59Du7gHv0atYeOLdsU7Og=",
+  "Hash": "pAT4Cpz5K74J6ULI5jI5tNqEYNhJ9FvJt/zkIHCzCi8=",
   "Source": "DrShop",
   "BasePath": "_content/DrShop",
   "Mode": "Default",
@@ -1105,12 +1105,12 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
     },
     {
-      "Identity": "D:\\Documents\\Visual Studio 2022\\Projects\\DrShop\\DrShop\\wwwroot\\Login-Signup\\script.js",
+      "Identity": "D:\\Documents\\Visual Studio 2022\\Projects\\DrShop\\DrShop\\wwwroot\\Login-Signup\\In&Up.css",
       "SourceId": "DrShop",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\Documents\\Visual Studio 2022\\Projects\\DrShop\\DrShop\\wwwroot\\",
       "BasePath": "_content/DrShop",
-      "RelativePath": "Login-Signup/script.js",
+      "RelativePath": "Login-Signup/In&Up.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -1119,15 +1119,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\Login-Signup\\script.js"
+      "OriginalItemSpec": "wwwroot\\Login-Signup\\In&Up.css"
     },
     {
-      "Identity": "D:\\Documents\\Visual Studio 2022\\Projects\\DrShop\\DrShop\\wwwroot\\Login-Signup\\style.css",
+      "Identity": "D:\\Documents\\Visual Studio 2022\\Projects\\DrShop\\DrShop\\wwwroot\\Login-Signup\\In&Up.js",
       "SourceId": "DrShop",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\Documents\\Visual Studio 2022\\Projects\\DrShop\\DrShop\\wwwroot\\",
       "BasePath": "_content/DrShop",
-      "RelativePath": "Login-Signup/style.css",
+      "RelativePath": "Login-Signup/In&Up.js",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -1136,7 +1136,24 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\Login-Signup\\style.css"
+      "OriginalItemSpec": "wwwroot\\Login-Signup\\In&Up.js"
+    },
+    {
+      "Identity": "D:\\Documents\\Visual Studio 2022\\Projects\\DrShop\\DrShop\\wwwroot\\Login-Signup\\jquery-3.6.1.min.js",
+      "SourceId": "DrShop",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Documents\\Visual Studio 2022\\Projects\\DrShop\\DrShop\\wwwroot\\",
+      "BasePath": "_content/DrShop",
+      "RelativePath": "Login-Signup/jquery-3.6.1.min.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Login-Signup\\jquery-3.6.1.min.js"
     }
   ]
 }

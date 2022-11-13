@@ -1,5 +1,6 @@
 using Application.Interfaces;
 using Application.Services.Account.Commands.RegisterUser;
+using Application.Services.Account.Queries.LoginUser;
 using Common;
 using FluentValidation;
 using FluentValidation.AspNetCore;
@@ -19,9 +20,10 @@ builder.Services.AddEntityFrameworkSqlServer().AddDbContext<DataBaseContext>(opt
 builder.Services.AddScoped<IDataBaseContext, DataBaseContext>();
 
 builder.Services.AddScoped<RegisterUserValidation>();
-
-
 builder.Services.AddScoped<IRegisterUserService, RegisterUserService>();
+
+builder.Services.AddScoped<UserLoginValidation>();
+builder.Services.AddScoped<ILoginUserService, LoginUserService>();
 
 
 // Add Policy Roles
@@ -31,19 +33,26 @@ builder.Services.AddAuthorization(config =>
     config.AddPolicy(Enum.GetName(BaseRole.Customer), policy => policy.RequireRole(Enum.GetName(BaseRole.Customer)));
 });
 
-builder.Services.AddAuthentication(config =>
-{
-    config.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-    config.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-    config.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-}).AddCookie(option =>
-{
-    option.AccessDeniedPath = "/Error";
-    option.LogoutPath = "/LogOut";
-    option.LoginPath = "/Login";
-    option.ExpireTimeSpan = TimeSpan.FromMinutes(10);
-});
+//builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+//    .AddCookie(options =>
+//    {
+//        options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
+//        options.SlidingExpiration = true;
+//        options.AccessDeniedPath = "/Forbidden/";
+//    });
 
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+}).AddCookie(options =>
+{
+    options.LoginPath = new PathString("/Authentication/Signin");
+    options.LogoutPath = new PathString("/Authentication/SignOut");
+    options.ExpireTimeSpan = TimeSpan.FromMinutes(5.0);
+    options.AccessDeniedPath = "/Authentication/Signin";
+});
 var app = builder.Build();
 
 
@@ -66,6 +75,7 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
 
 app.MapControllerRoute(
     name: "default",
