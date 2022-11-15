@@ -3,17 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32804.467
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{7DCD7758-FC15-4093-A172-9AD5A49F7E7F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{7DCD7758-FC15-4093-A172-9AD5A49F7E7F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{C78368C3-C539-4B8A-9FBA-75FBBBFC9438}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Application\Application.csproj", "{C78368C3-C539-4B8A-9FBA-75FBBBFC9438}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Persistance", "Persistance\Persistance.csproj", "{3BBCF142-7E34-4016-8907-A810903311E7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Persistance", "Persistance\Persistance.csproj", "{3BBCF142-7E34-4016-8907-A810903311E7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{938F2E6F-A435-44DE-B6D7-52B1C472E14C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DrShop", "DrShop\DrShop.csproj", "{1A641DCF-4B64-4DEE-89E7-5E68C5961AA2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "Common\Common.csproj", "{B504AF54-DE12-48EA-9F9E-75D233DF0F49}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{B504AF54-DE12-48EA-9F9E-75D233DF0F49}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dr_Shop", "Dr_Shop\Dr_Shop.csproj", "{4FF18211-29C5-4D55-9A7B-7FFA6EF5575E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,20 +33,20 @@ Global
 		{3BBCF142-7E34-4016-8907-A810903311E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3BBCF142-7E34-4016-8907-A810903311E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3BBCF142-7E34-4016-8907-A810903311E7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1A641DCF-4B64-4DEE-89E7-5E68C5961AA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1A641DCF-4B64-4DEE-89E7-5E68C5961AA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1A641DCF-4B64-4DEE-89E7-5E68C5961AA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1A641DCF-4B64-4DEE-89E7-5E68C5961AA2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B504AF54-DE12-48EA-9F9E-75D233DF0F49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B504AF54-DE12-48EA-9F9E-75D233DF0F49}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B504AF54-DE12-48EA-9F9E-75D233DF0F49}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B504AF54-DE12-48EA-9F9E-75D233DF0F49}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4FF18211-29C5-4D55-9A7B-7FFA6EF5575E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FF18211-29C5-4D55-9A7B-7FFA6EF5575E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FF18211-29C5-4D55-9A7B-7FFA6EF5575E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4FF18211-29C5-4D55-9A7B-7FFA6EF5575E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{1A641DCF-4B64-4DEE-89E7-5E68C5961AA2} = {938F2E6F-A435-44DE-B6D7-52B1C472E14C}
+		{4FF18211-29C5-4D55-9A7B-7FFA6EF5575E} = {938F2E6F-A435-44DE-B6D7-52B1C472E14C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4D09EEB8-FB36-4585-9B61-9D442DE8D0FC}

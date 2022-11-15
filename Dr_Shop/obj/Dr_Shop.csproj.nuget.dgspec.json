@@ -1,0 +1,372 @@
+{
+  "format": 1,
+  "restore": {
+    "D:\\Documents\\Visual Studio 2022\\Projects\\DrShop\\Dr_Shop\\Dr_Shop.csproj": {}
+  },
+  "projects": {
+    "D:\\Documents\\Visual Studio 2022\\Projects\\DrShop\\Application\\Application.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Documents\\Visual Studio 2022\\Projects\\DrShop\\Application\\Application.csproj",
+        "projectName": "Application",
+        "projectPath": "D:\\Documents\\Visual Studio 2022\\Projects\\DrShop\\Application\\Application.csproj",
+        "packagesPath": "C:\\Users\\Vatar\\.nuget\\packages\\",
+        "outputPath": "D:\\Documents\\Visual Studio 2022\\Projects\\DrShop\\Application\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Vatar\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "D:\\Documents\\Visual Studio 2022\\Projects\\DrShop\\Common\\Common.csproj": {
+                "projectPath": "D:\\Documents\\Visual Studio 2022\\Projects\\DrShop\\Common\\Common.csproj"
+              },
+              "D:\\Documents\\Visual Studio 2022\\Projects\\DrShop\\Domain\\Domain.csproj": {
+                "projectPath": "D:\\Documents\\Visual Studio 2022\\Projects\\DrShop\\Domain\\Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "FluentValidation": {
+              "target": "Package",
+              "version": "[11.3.0, )"
+            },
+            "FluentValidation.AspNetCore": {
+              "target": "Package",
+              "version": "[11.2.2, )"
+            },
+            "Microsoft.AspNetCore.Http.Abstractions": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.AspNetCore.Http.Features": {
+              "target": "Package",
+              "version": "[5.0.17, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "Microsoft.Extensions.Hosting.Abstractions": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Documents\\Visual Studio 2022\\Projects\\DrShop\\Common\\Common.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Documents\\Visual Studio 2022\\Projects\\DrShop\\Common\\Common.csproj",
+        "projectName": "Common",
+        "projectPath": "D:\\Documents\\Visual Studio 2022\\Projects\\DrShop\\Common\\Common.csproj",
+        "packagesPath": "C:\\Users\\Vatar\\.nuget\\packages\\",
+        "outputPath": "D:\\Documents\\Visual Studio 2022\\Projects\\DrShop\\Common\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Vatar\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Cryptography.KeyDerivation": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Documents\\Visual Studio 2022\\Projects\\DrShop\\Domain\\Domain.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Documents\\Visual Studio 2022\\Projects\\DrShop\\Domain\\Domain.csproj",
+        "projectName": "Domain",
+        "projectPath": "D:\\Documents\\Visual Studio 2022\\Projects\\DrShop\\Domain\\Domain.csproj",
+        "packagesPath": "C:\\Users\\Vatar\\.nuget\\packages\\",
+        "outputPath": "D:\\Documents\\Visual Studio 2022\\Projects\\DrShop\\Domain\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Vatar\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Documents\\Visual Studio 2022\\Projects\\DrShop\\Dr_Shop\\Dr_Shop.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Documents\\Visual Studio 2022\\Projects\\DrShop\\Dr_Shop\\Dr_Shop.csproj",
+        "projectName": "Dr_Shop",
+        "projectPath": "D:\\Documents\\Visual Studio 2022\\Projects\\DrShop\\Dr_Shop\\Dr_Shop.csproj",
+        "packagesPath": "C:\\Users\\Vatar\\.nuget\\packages\\",
+        "outputPath": "D:\\Documents\\Visual Studio 2022\\Projects\\DrShop\\Dr_Shop\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Vatar\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "D:\\Documents\\Visual Studio 2022\\Projects\\DrShop\\Application\\Application.csproj": {
+                "projectPath": "D:\\Documents\\Visual Studio 2022\\Projects\\DrShop\\Application\\Application.csproj"
+              },
+              "D:\\Documents\\Visual Studio 2022\\Projects\\DrShop\\Persistance\\Persistance.csproj": {
+                "projectPath": "D:\\Documents\\Visual Studio 2022\\Projects\\DrShop\\Persistance\\Persistance.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Cryptography.Internal": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "Microsoft.AspNetCore.DataProtection": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Documents\\Visual Studio 2022\\Projects\\DrShop\\Persistance\\Persistance.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Documents\\Visual Studio 2022\\Projects\\DrShop\\Persistance\\Persistance.csproj",
+        "projectName": "Persistance",
+        "projectPath": "D:\\Documents\\Visual Studio 2022\\Projects\\DrShop\\Persistance\\Persistance.csproj",
+        "packagesPath": "C:\\Users\\Vatar\\.nuget\\packages\\",
+        "outputPath": "D:\\Documents\\Visual Studio 2022\\Projects\\DrShop\\Persistance\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Vatar\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "D:\\Documents\\Visual Studio 2022\\Projects\\DrShop\\Application\\Application.csproj": {
+                "projectPath": "D:\\Documents\\Visual Studio 2022\\Projects\\DrShop\\Application\\Application.csproj"
+              },
+              "D:\\Documents\\Visual Studio 2022\\Projects\\DrShop\\Common\\Common.csproj": {
+                "projectPath": "D:\\Documents\\Visual Studio 2022\\Projects\\DrShop\\Common\\Common.csproj"
+              },
+              "D:\\Documents\\Visual Studio 2022\\Projects\\DrShop\\Domain\\Domain.csproj": {
+                "projectPath": "D:\\Documents\\Visual Studio 2022\\Projects\\DrShop\\Domain\\Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.Relational": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[7.0.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
