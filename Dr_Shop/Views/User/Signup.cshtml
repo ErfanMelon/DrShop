@@ -1,0 +1,59 @@
+﻿@model SignupViewModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="~/authentication/signup.css" rel="stylesheet" />
+    <link rel="shortcut icon" href="Icon Name Here !" type="image/x-icon">
+    <title>ثبت نام</title>
+</head>
+
+<body>
+    @if (ViewBag.Error!=null)
+    {
+        @ViewBag.Error
+    }
+    <form asp-action="Signup" method="post">
+        <input id="input-1" type="text" placeholder="لطفا نام کامل خود را وارد کنید" required autofocus asp-for="FullName" />
+        <label for="input-1">
+            <span class="label-text">نام کامل</span>
+            <span class="nav-dot"></span>
+            <div class="signup-button-trigger">ثبت نام</div>
+        </label>
+        <input id="input-2" type="text" placeholder="لطفا نام کاربری خود را وارد کنید" required asp-for="Username" />
+        <label for="input-2">
+            <span class="label-text">نام کاربری</span>
+            <span class="nav-dot"></span>
+        </label>
+        <input id="input-3" type="email" placeholder="email@address.com" required asp-for="Email"/>
+        <label for="input-3">
+            <span class="label-text">ایمیل</span>
+            <span class="nav-dot"></span>
+        </label>
+        <input id="input-4" type="text" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;" required asp-for="Password"/>
+        <label for="input-4">
+            <span class="label-text">رمز</span>
+            <span class="nav-dot"></span>
+        </label>
+        <input id="input-5" type="text" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;" required asp-for="RePassword"/>
+        <label for="input-5">
+            <span class="label-text">تایدییه رمز</span>
+            <span class="nav-dot"></span>
+        </label>
+        <button type="submit">کلیک کنید تا حساب کاربری شما ساخته شود</button>
+        <p class="tip">تب را فشار دهید</p>
+        <div class="signup-button">ثبت نام</div>
+    </form>
+
+
+
+
+</body>
+
+</html>

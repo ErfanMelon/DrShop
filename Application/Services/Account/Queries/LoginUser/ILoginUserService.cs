@@ -16,52 +16,36 @@ namespace Application.Services.Account.Queries.LoginUser
     public class LoginUserService : ILoginUserService
     {
         private readonly IDataBaseContext _context;
-        private readonly UserLoginValidation _validationRules;
-        public LoginUserService(IDataBaseContext context, UserLoginValidation validationRules)
+        public LoginUserService(IDataBaseContext context)
         {
             _context = context;
-            _validationRules = validationRules;
         }
 
         public ResultDto<UserLoginDetailDto> Execute(RequestUserLoginDto request)
         {
-            var validation = _validationRules.Validate(request);
-            if (!validation.IsValid)
-            {
-                return new ResultDto<UserLoginDetailDto> { Messege = validation.Errors[0].ErrorMessage };
-            }
             PasswordHasher passwordHasher = new PasswordHasher();
 
-            var user = _context.Users.First(e => e.Email == request.Email);
-            bool truePassword = passwordHasher.VerifyPassword(user.Password, request.Password);
-            if (truePassword)
+            var user = _context.Users.FirstOrDefault(e => e.Email == request.Email);
+            if (user != null)
             {
-                return new ResultDto<UserLoginDetailDto>
+                bool truePassword = passwordHasher.VerifyPassword(user.Password, request.Password);
+                if (truePassword)
                 {
-                    Data = new UserLoginDetailDto
+                    return new ResultDto<UserLoginDetailDto>
                     {
-                        Username = user.Username,
-                        UserId = user.UserId,
-                        Role = Enum.GetName(typeof(BaseRole), user.RoleId)
-                    },
-                    IsSuccess = true,
-                    Messege = "خوش آمدید"
-                };
+                        Data = new UserLoginDetailDto
+                        {
+                            Username = user.Username,
+                            UserId = user.UserId,
+                            Role = Enum.GetName(typeof(BaseRole), user.RoleId)
+                        },
+                        IsSuccess = true,
+                        Message = "خوش آمدید"
+                    };
+                }
+                return new ResultDto<UserLoginDetailDto> { Message = "رمز عبور اشتباه است" };
             }
-            return new ResultDto<UserLoginDetailDto> { Messege = "رمز عبور اشتباه است" };
-        }
-    }
-    public class UserLoginValidation : AbstractValidator<RequestUserLoginDto>
-    {
-        private readonly IDataBaseContext _context;
-        public UserLoginValidation(IDataBaseContext context)
-        {
-            _context = context;
-
-            RuleFor(e => e.Email).NotEmpty().WithMessage("ایمیل را وارد کنید");
-            RuleFor(e => e.Email).EmailAddress().WithMessage("ایمیل معتبر نمیباشد");
-            RuleFor(e => e.Password).NotEmpty().WithMessage("رمز عبور را وارد کنید");
-            RuleFor(e => e.Email).Must(e => _context.Users.Any(u => u.Email == e)).WithMessage("این ایمیل ثبت نام نکرده است");
+            return new ResultDto<UserLoginDetailDto> { Message = "کاربری یافت نشد" };
 
         }
     }

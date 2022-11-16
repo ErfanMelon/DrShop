@@ -1,6 +1,7 @@
 using Application.Interfaces;
 using Application.Services.Account.Commands.RegisterUser;
 using Application.Services.Account.Queries.LoginUser;
+using Common;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using Persistance.Context;
@@ -15,9 +16,7 @@ builder.Services.AddDbContext<DataBaseContext>(options =>
     options.UseSqlServer(connectionString);
 });
 builder.Services.AddScoped<IDataBaseContext, DataBaseContext>();
-builder.Services.AddScoped<RegisterUserValidation>();
 builder.Services.AddScoped<IRegisterUserService, RegisterUserService>();
-builder.Services.AddScoped<UserLoginValidation>();
 builder.Services.AddScoped<ILoginUserService, LoginUserService>();
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
@@ -26,7 +25,15 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         options.Cookie.Name = "Auth";
         options.SlidingExpiration = true;
         options.AccessDeniedPath = "/Error/403";
+        options.LoginPath = "/Login";
+        options.LogoutPath = "/Logout";
     });
+
+builder.Services.AddAuthorization(config =>
+{
+    config.AddPolicy(Enum.GetName(BaseRole.Admin), policy => policy.RequireRole(Enum.GetName(BaseRole.Admin)));
+    config.AddPolicy(Enum.GetName(BaseRole.Customer), policy => policy.RequireRole(Enum.GetName(BaseRole.Customer)));
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

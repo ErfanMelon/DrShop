@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "4JwfnJSzFvbjWqOXCqG/TrApJzKwfe25HJXgWiH45w8=",
+  "Hash": "YsLXEd8iBn5Ya8swYzPoFjrtxCzXq61qNpzPPryoJOg=",
   "Source": "Dr_Shop",
   "BasePath": "_content/Dr_Shop",
   "Mode": "Default",
@@ -49,6 +49,40 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "D:\\Documents\\Visual Studio 2022\\Projects\\DrShop\\Dr_Shop\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\Dr_Shop.bundle.scp.css"
+    },
+    {
+      "Identity": "D:\\Documents\\Visual Studio 2022\\Projects\\DrShop\\Dr_Shop\\wwwroot\\Authentication\\LogIn.css",
+      "SourceId": "Dr_Shop",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Documents\\Visual Studio 2022\\Projects\\DrShop\\Dr_Shop\\wwwroot\\",
+      "BasePath": "_content/Dr_Shop",
+      "RelativePath": "Authentication/LogIn.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Authentication\\LogIn.css"
+    },
+    {
+      "Identity": "D:\\Documents\\Visual Studio 2022\\Projects\\DrShop\\Dr_Shop\\wwwroot\\Authentication\\SignUp.css",
+      "SourceId": "Dr_Shop",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Documents\\Visual Studio 2022\\Projects\\DrShop\\Dr_Shop\\wwwroot\\",
+      "BasePath": "_content/Dr_Shop",
+      "RelativePath": "Authentication/SignUp.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Authentication\\SignUp.css"
     },
     {
       "Identity": "D:\\Documents\\Visual Studio 2022\\Projects\\DrShop\\Dr_Shop\\wwwroot\\css\\site.css",

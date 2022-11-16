@@ -1,19 +1,15 @@
 ﻿using Application.Services.Account.Commands.RegisterUser;
 using Application.Services.Account.Queries.LoginUser;
+using Common;
 using Dr_Shop.Models.UserViewModels;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Dr_Shop.Controllers
 {
-    public class UserController:Controller
+    public class UserController : Controller
     {
         private readonly IRegisterUserService _registerUserService;
         private readonly ILoginUserService _loginUserService;
@@ -22,7 +18,7 @@ namespace Dr_Shop.Controllers
             _registerUserService = registerUserService;
             _loginUserService = loginUserService;
         }
-        
+
         [HttpGet("/Login")]
         public IActionResult Login()
         {
@@ -31,29 +27,86 @@ namespace Dr_Shop.Controllers
         [HttpPost("/Login")]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
-            var result = _loginUserService.Execute(new RequestUserLoginDto
+            ResultDto<UserLoginDetailDto> result;
+            var validationRules = new LoginViewModelValidation();
+            var validation = validationRules.Validate(model); // validate LoginViewModel using FluentValidation
+            if (validation.IsValid)
             {
-                Email = model.Email.Trim(),
-                Password = model.Password
-            });
-            if (result.IsSuccess)
-            {
-                var claims = new List<Claim>
+                result = _loginUserService.Execute(new RequestUserLoginDto
                 {
-                    new Claim(ClaimTypes.Name,result.Data.Username),
-                    new Claim(ClaimTypes.Role,result.Data.Role)
-                };
-                var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-                ClaimsPrincipal claimsPrincipal = new ClaimsPrincipal(identity);
-                AuthenticationProperties properties = new AuthenticationProperties
+                    Email = model.Email.Trim(),
+                    Password = model.Password
+                });
+                if (result.IsSuccess)
                 {
-                    IsPersistent = true,
-                    ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(10),
-                };
-                await HttpContext.SignInAsync(claimsPrincipal, properties);
-                return RedirectToAction("Index", "Home");
+                    await SetAuthentications(result.Data.Username, result.Data.UserId.ToString(), result.Data.Role);
+                    return RedirectToAction("Index", "Home");
+                }
             }
+            else
+            {
+                result = new ResultDto<UserLoginDetailDto> { Message = validation.Errors[0].ErrorMessage };
+            }
+
+
+            ViewBag.Error = result.Message;
             return View(model);
+        }
+        [HttpGet("/Signup")]
+        public IActionResult Signup()
+        {
+            return View();
+        }
+        [HttpPost("/Signup")]
+        public async Task<IActionResult> Signup(SignupViewModel model)
+        {
+            ResultDto<int> result;
+            SignupViewModelValidation validationRules = new SignupViewModelValidation();
+            var validation = validationRules.Validate(model); // validate SignupViewModel using FluentValidation
+            if (validation.IsValid)
+            {
+                result = _registerUserService.Execute(new RegisterUserDto
+                {
+                    Email = model.Email.Trim(),
+                    Password = model.Password,
+                    RoleId = (int)BaseRole.Customer,
+                    Username = model.Username.Trim(),
+                });
+                if (result.IsSuccess)
+                {
+                    await SetAuthentications(model.Username, result.Data.ToString(), Enum.GetName(BaseRole.Customer));
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+            else
+            {
+                result = new ResultDto<int> { Message = validation.Errors[0].ErrorMessage };
+            }
+            ViewBag.Error = result.Message;
+            return View(model);
+        }
+        [Route("/Logout")]
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("Index", "Home");
+        }
+        async Task SetAuthentications(string username, string userid, string role)
+        {
+            var claims = new List<Claim>
+                {
+                    new Claim(ClaimTypes.Name,username),
+                    new Claim(ClaimTypes.NameIdentifier,userid),
+                    new Claim(ClaimTypes.Role,role)
+                };
+            var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+            ClaimsPrincipal claimsPrincipal = new ClaimsPrincipal(identity);
+            AuthenticationProperties properties = new AuthenticationProperties
+            {
+                IsPersistent = true,
+                ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(10),
+            };
+            await HttpContext.SignInAsync(claimsPrincipal, properties);
         }
     }
 }
