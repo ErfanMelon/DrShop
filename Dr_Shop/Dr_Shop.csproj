@@ -7,17 +7,24 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="Areas\Admin\Views\Home\Index.cshtml" />
     <None Include="Views\User\Login.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Cryptography.Internal" Version="7.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.DataProtection" Version="7.0.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.10" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Application\Application.csproj" />
     <ProjectReference Include="..\Persistance\Persistance.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\Admin\Models\" />
   </ItemGroup>
 
 </Project>
