@@ -4,6 +4,9 @@ using System.Security.Cryptography;
 
 namespace Common
 {
+    /// <summary>
+    /// کلاسی برای رمزگذاری و رمزنگاری گذرواژه
+    /// </summary>
     public class  PasswordHasher
     {
         // Format Markers:

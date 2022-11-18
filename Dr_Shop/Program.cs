@@ -1,5 +1,6 @@
 using Application.Interfaces;
 using Application.Services.Account.Commands.RegisterUser;
+using Application.Services.Account.Queries.GetUsers;
 using Application.Services.Account.Queries.LoginUser;
 using Common;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -15,9 +16,13 @@ builder.Services.AddDbContext<DataBaseContext>(options =>
 {
     options.UseSqlServer(connectionString);
 });
+// Database Services
 builder.Services.AddScoped<IDataBaseContext, DataBaseContext>();
+
+// User Services
 builder.Services.AddScoped<IRegisterUserService, RegisterUserService>();
 builder.Services.AddScoped<ILoginUserService, LoginUserService>();
+builder.Services.AddScoped<IGetUsersService, GetUsersService>();
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>

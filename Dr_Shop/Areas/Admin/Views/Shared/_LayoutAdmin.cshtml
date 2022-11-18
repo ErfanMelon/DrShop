@@ -1,2 +1,261 @@
-﻿<h3>Admin Layout</h3>
-@RenderBody()
+﻿<!doctype html>
+<html lang="en" dir="rtl" class="color-sidebar sidebarcolor1 color-header headercolor1">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--favicon-->
+    <link rel="icon" href="~/adminassets/images/favicon-32x32.png" type="image/png">
+    <!--plugins-->
+    <link href="~/adminassets/plugins/simplebar/css/simplebar.css" rel="stylesheet">
+    <link href="~/adminassets/plugins/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet">
+    <link href="~/adminassets/plugins/metismenu/css/metisMenu.min.css" rel="stylesheet">
+    <!-- loader-->
+    <link href="~/adminassets/css/pace.min.css" rel="stylesheet">
+    <script src="~/adminassets/js/pace.min.js"></script>
+    <!-- Bootstrap CSS -->
+    <link href="~/adminassets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/adminassets/css/bootstrap-extended.css" rel="stylesheet">
+    <link href="~/adminassets/css/app.css" rel="stylesheet">
+    <link href="~/adminassets/css/icons.css" rel="stylesheet">
+    <!-- Theme Style CSS -->
+    <link rel="stylesheet" href="~/adminassets/css/dark-theme.css">
+    <link rel="stylesheet" href="~/adminassets/css/semi-dark.css">
+    <link rel="stylesheet" href="~/adminassets/css/header-colors.css">
+    <title>سایت ادمین</title>
+</head>
+
+<body class="rtl  pace-done">
+    <div class="pace  pace-inactive">
+        <div class="pace-progress" data-progress-text="100%" data-progress="99" style="transform: translate3d(-100%, 0px, 0px);">
+            <div class="pace-progress-inner"></div>
+        </div>
+        <div class="pace-activity"></div>
+    </div>
+    <!--wrapper-->
+    <div class="wrapper">
+        <!--sidebar wrapper -->
+        <div class="sidebar-wrapper" data-simplebar="init">
+            <div class="simplebar-wrapper" style="margin: 0px;">
+                <div class="simplebar-height-auto-observer-wrapper"><div class="simplebar-height-auto-observer"></div></div><div class="simplebar-mask">
+                    <div class="simplebar-offset" style="left: 0px; bottom: 0px;">
+                        <div class="simplebar-content-wrapper" style="height: 100%; overflow: hidden;">
+                            <div class="simplebar-content mm-active" style="padding: 0px;">
+                                <div class="sidebar-header">
+                                    <div>
+                                        <img src="~/adminassets/images/logo-icon.png" class="logo-icon" alt="logo icon">
+                                    </div>
+                                    <div>
+                                        <h4 class="logo-text">Dr.Shop</h4>
+                                    </div>
+                                    <div class="toggle-icon ms-auto">
+                                        <i class="bx bx-last-page"></i>
+                                    </div>
+                                </div>
+                                <!--navigation-->
+                                <ul class="metismenu mm-show" id="menu">
+                                    <li class="mm-active">
+                                        <a href="javascript:;" class="has-arrow" aria-expanded="true">
+                                            <div class="parent-icon">
+                                                <i class="bx bx-home"></i>
+                                            </div>
+                                            <div class="menu-title">داشبورد</div>
+                                        </a>
+                                        <ul class="mm-show mm-collapse">
+                                            <li class="mm-active">
+                                                <a asp-controller="Home" asp-action="Index"><i class="bx bx-left-arrow-alt"></i>صفحه ادمین</a>
+                                            </li>
+                                            <li>
+                                                <a asp-area="" asp-action="Index" asp-controller="Home"><i class="bx bx-left-arrow-alt"></i>صفحه اصلی سایت</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:;" class="has-arrow">
+                                            <div class="parent-icon">
+                                                <i class="bx bx-user"></i>
+                                            </div>
+                                            <div class="menu-title">مدیریت کاربران</div>
+                                        </a>
+                                        <ul class="mm-collapse">
+                                            <li>
+                                                <a asp-controller="Users" asp-action="Index"><i class="bx bx-left-arrow-alt"></i>لیست کاربران</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="menu-label">مدیریت</li>
+                                </ul>
+                                <!--end navigation-->
+                            </div>
+                        </div>
+                    </div>
+                </div><div class="simplebar-placeholder" style="width: auto; height: 232px;"></div>
+            </div><div class="simplebar-track simplebar-horizontal" style="visibility: hidden;"><div class="simplebar-scrollbar" style="width: 0px; display: none;"></div></div><div class="simplebar-track simplebar-vertical" style="visibility: hidden;"><div class="simplebar-scrollbar" style="height: 0px; display: none;"></div></div>
+        </div>
+        <!--end sidebar wrapper -->
+        <!--start header -->
+        <header>
+            <div class="topbar d-flex align-items-center">
+                <nav class="navbar navbar-expand">
+                    <div class="mobile-toggle-menu">
+                        <i class="bx bx-menu"></i>
+                    </div>
+                    <div class="top-menu-left d-none d-lg-block">
+                    </div>
+                    <div class="search-bar flex-grow-1">
+                        <div class="position-relative search-bar-box">
+                            <input type="text" class="form-control search-control" placeholder="جستجو ..."> <span class="position-absolute top-50 search-show translate-middle-y"><i class="bx bx-search"></i></span>
+                            <span class="position-absolute top-50 search-close translate-middle-y"><i class="bx bx-x"></i></span>
+                        </div>
+                    </div>
+                    <div class="top-menu ms-auto">
+                        <ul class="navbar-nav align-items-center">
+                            <li class="nav-item mobile-search-icon">
+                                <a class="nav-link" href="#">
+                                    <i class="bx bx-search"></i>
+                                </a>
+                            </li>
+                            <li class="nav-item dropdown dropdown-large">
+                                <a class="nav-link dropdown-toggle dropdown-toggle-nocaret position-relative" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <span class="alert-count">7</span>
+                                    <i class="bx bx-bell"></i>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-end">
+                                    <a href="javascript:;">
+                                        <div class="msg-header">
+                                            <p class="msg-header-title">اعلان ها</p>
+                                            <p class="msg-header-clear ms-auto">علامت گذاری همه به عنوان خوانده شده</p>
+                                        </div>
+                                    </a>
+                                    <div class="header-notifications-list ps">
+                                        <a class="dropdown-item" href="javascript:;">
+                                            <div class="d-flex align-items-center">
+                                                <div class="notify bg-light-primary text-primary">
+                                                    <i class="bx bx-group"></i>
+                                                </div>
+                                                <div class="flex-grow-1">
+                                                    <h6 class="msg-name">کاربران جدید<span class="msg-time float-end">14 ثانیه پیش</span></h6>
+                                                    <p class="msg-info">5 کاربر جدید ثبت نام کردند</p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <a class="dropdown-item" href="javascript:;">
+                                            <div class="d-flex align-items-center">
+                                                <div class="notify bg-light-primary text-primary">
+                                                    <i class="bx bx-group"></i>
+                                                </div>
+                                                <div class="flex-grow-1">
+                                                    <h6 class="msg-name">کاربران جدید<span class="msg-time float-end">14 ثانیه پیش</span></h6>
+                                                    <p class="msg-info">5 کاربر جدید ثبت نام کردند</p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <div class="ps__rail-x" style="left: 0px; bottom: 0px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 0px; left: -6px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 0px;"></div></div>
+                                    </div>
+                                    <a href="javascript:;">
+                                        <div class="text-center msg-footer">مشاهده همه اعلان ها</div>
+                                    </a>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown dropdown-large">
+                                <a class="nav-link dropdown-toggle dropdown-toggle-nocaret position-relative" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <span class="alert-count">8</span>
+                                    <i class="bx bx-comment"></i>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-end">
+                                    <div class="header-message-list ps">
+                                        <a class="dropdown-item" href="javascript:;">
+                                            <div class="d-flex align-items-center">
+                                                <div class="user-online">
+                                                    <img src="~/adminassets/images/avatars/guest.png" class="msg-avatar" alt="user avatar">
+                                                </div>
+                                                <div class="flex-grow-1">
+                                                    <h6 class="msg-name">کاربر <span class="msg-time float-end">5 ثانیه پیش</span></h6>
+                                                    <p class="msg-info">این یک پیام استاندارد است</p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <a class="dropdown-item" href="javascript:;">
+                                            <div class="d-flex align-items-center">
+                                                <div class="user-online">
+                                                    <img src="~/adminassets/images/avatars/guest.png" class="msg-avatar" alt="user avatar">
+                                                </div>
+                                                <div class="flex-grow-1">
+                                                    <h6 class="msg-name">کاربر <span class="msg-time float-end">5 ثانیه پیش</span></h6>
+                                                    <p class="msg-info">این یک پیام استاندارد است</p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <div class="ps__rail-x" style="left: 0px; bottom: 0px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 0px; left: -6px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 0px;"></div></div>
+                                    </div>
+                                    <a href="javascript:;">
+                                        <div class="text-center msg-footer">مشاهده همه پیغام ها</div>
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="user-box dropdown">
+                        <a class="d-flex align-items-center nav-link dropdown-toggle dropdown-toggle-nocaret" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="~/adminassets/images/avatars/guest.png" class="user-img" alt="user avatar">
+                            <div class="user-info ps-3">
+                                <p class="user-name mb-0">نام کاربر</p>
+                                <p class="designattion mb-0">نقش کاربر</p>
+                            </div>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li>
+                                <a class="dropdown-item" href="javascript:;"><i class="bx bx-user"></i><span>پروفایل</span></a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="javascript:;"><i class="bx bx-cog"></i><span>تنظیمات</span></a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="javascript:;"><i class="bx bx-home-circle"></i><span>داشبورد</span></a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="javascript:;"><i class="bx bx-dollar-circle"></i><span>درآمد</span></a>
+                            </li>
+                            <li>
+                                <div class="dropdown-divider mb-0"></div>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="javascript:;"><i class="bx bx-log-out-circle"></i><span>خروج</span></a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </header>
+        <!--end header -->
+        <!--start page wrapper -->
+        <div class="page-wrapper">
+            <div class="page-content">
+                @RenderBody()
+            </div>
+        </div>
+        <!--end page wrapper -->
+        <!--start overlay-->
+        <div class="overlay toggle-icon"></div>
+        <!--end overlay-->
+        <!--Start Back To Top Button-->
+        <a href="javaScript:;" class="back-to-top"><i class="bx bxs-up-arrow-alt"></i></a>
+        <!--End Back To Top Button-->
+        <footer class="page-footer">
+            <p class="mb-0">کپی رایت © 2021. تمامی حقوق محفوظ است.</p>
+        </footer>
+    </div>
+    <!--end wrapper-->
+    <!-- Bootstrap JS -->
+    <script src="~/adminassets/js/bootstrap.bundle.min.js"></script>
+    <!--plugins-->
+    <script src="~/adminassets/js/jquery.min.js"></script>
+    <script src="~/adminassets/plugins/simplebar/js/simplebar.min.js"></script>
+    <script src="~/adminassets/plugins/metismenu/js/metisMenu.min.js"></script>
+    <script src="~/adminassets/plugins/perfect-scrollbar/js/perfect-scrollbar.js"></script>
+    <!--app JS-->
+    <script src="~/adminassets/js/app.js"></script>
+
+
+</body>
+</html>
