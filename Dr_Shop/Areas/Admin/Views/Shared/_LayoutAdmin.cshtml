@@ -22,6 +22,9 @@
     <link rel="stylesheet" href="~/adminassets/css/dark-theme.css">
     <link rel="stylesheet" href="~/adminassets/css/semi-dark.css">
     <link rel="stylesheet" href="~/adminassets/css/header-colors.css">
+
+    <link href="~/adminassets/plugins/notifications/css/lobibox.min.css" rel="stylesheet" />
+    @RenderSection("Css",false)
     <title>سایت ادمین</title>
 </head>
 
@@ -55,23 +58,24 @@
                                 <!--navigation-->
                                 <ul class="metismenu mm-show" id="menu">
                                     <li class="mm-active">
-                                        <a href="javascript:;" class="has-arrow" aria-expanded="true">
+                                        <a class="has-arrow" href="javascript:;" aria-expanded="true">
                                             <div class="parent-icon">
                                                 <i class="bx bx-home"></i>
                                             </div>
                                             <div class="menu-title">داشبورد</div>
                                         </a>
                                         <ul class="mm-show mm-collapse">
-                                            <li class="mm-active">
-                                                <a asp-controller="Home" asp-action="Index"><i class="bx bx-left-arrow-alt"></i>صفحه ادمین</a>
-                                            </li>
                                             <li>
-                                                <a asp-area="" asp-action="Index" asp-controller="Home"><i class="bx bx-left-arrow-alt"></i>صفحه اصلی سایت</a>
+                                                <a asp-controller="Home" asp-action="Index" aria-expanded="true"><i class="bx bx-left-arrow-alt"></i>صفحه ادمین</a>
                                             </li>
+                                            <li class="">
+                                                <a asp-area="" asp-controller="Home" asp-action="Index"><i class="bx bx-left-arrow-alt"></i>صفحه اصلی سایت</a>
+                                            </li>
+
                                         </ul>
                                     </li>
                                     <li>
-                                        <a href="javascript:;" class="has-arrow">
+                                        <a href="javascript:;" class="has-arrow" aria-expanded="false">
                                             <div class="parent-icon">
                                                 <i class="bx bx-user"></i>
                                             </div>
@@ -81,9 +85,11 @@
                                             <li>
                                                 <a asp-controller="Users" asp-action="Index"><i class="bx bx-left-arrow-alt"></i>لیست کاربران</a>
                                             </li>
+                                            <li>
+                                                <a asp-controller="Users" asp-action="Create"><i class="bx bx-left-arrow-alt"></i> افزودن کاربر جدید</a>
+                                            </li>
                                         </ul>
                                     </li>
-                                    <li class="menu-label">مدیریت</li>
                                 </ul>
                                 <!--end navigation-->
                             </div>
@@ -199,8 +205,17 @@
                         <a class="d-flex align-items-center nav-link dropdown-toggle dropdown-toggle-nocaret" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <img src="~/adminassets/images/avatars/guest.png" class="user-img" alt="user avatar">
                             <div class="user-info ps-3">
-                                <p class="user-name mb-0">نام کاربر</p>
-                                <p class="designattion mb-0">نقش کاربر</p>
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    <p class="user-name mb-0">@User.Identity.Name</p>
+                                    <p class="designattion mb-0">@ClaimUtility.GetUserRole(User)</p>
+                                }
+                                else
+                                {
+                                    <p class="user-name mb-0">نام کاربر</p>
+                                    <p class="designattion mb-0">نقش کاربر</p>
+                                }
+
                             </div>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
@@ -220,7 +235,7 @@
                                 <div class="dropdown-divider mb-0"></div>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="javascript:;"><i class="bx bx-log-out-circle"></i><span>خروج</span></a>
+                                <a class="dropdown-item" asp-area="" asp-controller="User" asp-action="Logout"><i class="bx bx-log-out-circle"></i><span>خروج</span></a>
                             </li>
                         </ul>
                     </div>
@@ -256,6 +271,9 @@
     <!--app JS-->
     <script src="~/adminassets/js/app.js"></script>
 
-
+    <script src="~/adminassets/plugins/notifications/js/lobibox.min.js"></script>
+    <script src="~/adminassets/plugins/notifications/js/notifications.min.js"></script>
+    @RenderSection("Scripts",required:false)
+    <div class="lobibox-notify-wrapper top left"></div>
 </body>
 </html>

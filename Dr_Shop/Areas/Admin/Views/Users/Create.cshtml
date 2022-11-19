@@ -1,0 +1,90 @@
+﻿@model RegisterUserDto
+<div class="card">
+    <div class="card-body">
+        <div class="p-4 rounded">
+            <div class="text-center">
+                <h3 class="">ثبت نام</h3>
+            </div>
+
+            <div class="login-separater text-center mb-4">
+                <span> با ایمیل</span>
+                <hr>
+            </div>
+            <div class="form-body">
+                <form class="row g-3" asp-action="Create" method="post">
+                    <div class="col-12">
+                        <label class="form-label">نام کامل</label>
+                        <input type="text" class="form-control" asp-for="Username" placeholder="پدرام">
+                    </div>
+                    <div class="col-12">
+                        <label  class="form-label">آدرس ایمیل</label>
+                        <input type="email" class="form-control" asp-for="Email" placeholder="example@user.com">
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label">رمز عبور</label>
+                        <div class="input-group" id="show_hide_password">
+                            <input type="password" class="form-control border-end-0" asp-for="Password" value="12345678" placeholder="رمز عبور خود را وارد کنید"> <a href="javascript:;" class="input-group-text bg-transparent"><i class="bx bx-hide"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <label  class="form-label">سطح دسترسی</label>
+                        <select class="form-select" asp-for="RoleId" asp-items="ViewBag.Roles">
+                        </select>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
+                            <label class="form-check-label" for="flexSwitchCheckChecked">
+                                من با
+                                قوانین و سیاست حریم خصوصی موافقم
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary"><i class="bx bx-user"></i>ثبت نام</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+    <script>
+
+        $(document).ready(function () {
+            $("#show_hide_password a").on('click', function (event) {
+                event.preventDefault();
+                if ($('#show_hide_password input').attr("type") == "text") {
+                    $('#show_hide_password input').attr('type', 'password');
+                    $('#show_hide_password i').addClass("bx-hide");
+                    $('#show_hide_password i').removeClass("bx-show");
+                } else if ($('#show_hide_password input').attr("type") == "password") {
+                    $('#show_hide_password input').attr('type', 'text');
+                    $('#show_hide_password i').removeClass("bx-hide");
+                    $('#show_hide_password i').addClass("bx-show");
+                }
+            });
+        });
+
+    </script>
+    @if (ViewBag.Error != null)
+    {
+        <script>
+            Lobibox.notify('warning', {
+                pauseDelayOnHover: true,
+                size: 'mini',
+                rounded: true,
+                delayIndicator: false,
+                icon: 'bx bx-error',
+                continueDelayOnInactiveTab: false,
+                position: 'top left',
+                msg: '@ViewBag.Error'
+            });
+
+        </script>
+    }
+}

@@ -25,7 +25,7 @@
         <a class="bg_links social linkedin" href="Https://www.instagram.Com/Dr.Shop" target="_blank">
             <span class="icon"></span>
         </a>
-        <a class="bg_links logo"></a>
+        <a class="bg_links logo" asp-action="Index" asp-controller="Home"></a>
     </div>
 
     <nav>
@@ -33,8 +33,8 @@
             <p class="website_name">Dr.Shop</p>
             <div class="menu_links">
                 <a href="" class="link">About Us</a>
-                <a href="" class="link">Log In</a>
-                <a href="" class="link">Sign Up</a>
+                <a asp-action="Login" asp-controller="User" class="link">Log In</a>
+                <a asp-action="Signup" asp-controller="User" class="link">Sign Up</a>
             </div>
             <div class="menu_icon">
                 <span class="icon"></span>
@@ -73,15 +73,22 @@
                 </div>
 
 
-                <p class="p404" data-depth="0.50">404</p>
-                <p class="p404" data-depth="0.10">404</p>
+                <p class="p404" data-depth="0.50">@ViewBag.ErrorCode</p>
+                <p class="p404" data-depth="0.10">@ViewBag.ErrorCode</p>
 
             </div>
 
 
             <div class="text">
                 <article>
+                    @if (TempData["Error"] != null)
+                    {
+                        <p>خطا <br />@TempData["Error"]</p>
+                    }
+                    else
+                    {
                     <p>اوه اوه! انگار گم شدی <br>اگر تمایل دارید به صفحه اصلی برگردید ، بر روی دکمه زیر کلیک کنید!</p>
+                    }
                     <button>خانه</button>
                 </article>
             </div>

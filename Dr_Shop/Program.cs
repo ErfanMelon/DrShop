@@ -1,5 +1,8 @@
-using Application.Interfaces;
+﻿using Application.Interfaces;
+using Application.Services.Account.Commands.DeleteUser;
+using Application.Services.Account.Commands.EditUser;
 using Application.Services.Account.Commands.RegisterUser;
+using Application.Services.Account.Queries.GetUserForEdit;
 using Application.Services.Account.Queries.GetUsers;
 using Application.Services.Account.Queries.LoginUser;
 using Common;
@@ -20,9 +23,12 @@ builder.Services.AddDbContext<DataBaseContext>(options =>
 builder.Services.AddScoped<IDataBaseContext, DataBaseContext>();
 
 // User Services
-builder.Services.AddScoped<IRegisterUserService, RegisterUserService>();
-builder.Services.AddScoped<ILoginUserService, LoginUserService>();
-builder.Services.AddScoped<IGetUsersService, GetUsersService>();
+builder.Services.AddScoped<IRegisterUserService, RegisterUserService>(); // ثبت نام کاربران
+builder.Services.AddScoped<ILoginUserService, LoginUserService>(); // ورود کاربران
+builder.Services.AddScoped<IGetUsersService, GetUsersService>(); // لیستی از کاربران (Admin)
+builder.Services.AddScoped<IGetUserService, GetUserService>(); // مشخصات کاربر (Admin)
+builder.Services.AddScoped<IEditUserService, EditUserService>(); // ویرایش کاربر (Admin)
+builder.Services.AddScoped<IDeleteUserService, DeleteUserService>(); // حذف کاربر (Admin)
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>

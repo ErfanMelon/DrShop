@@ -30,7 +30,11 @@ namespace Dr_Shop.Controllers
             {
                 case 403:
                     return View("Error403");
+                case 400:
+                    ViewBag.ErrorCode = statusCode;
+                    return View("Error404");
                 default:
+                    ViewBag.ErrorCode = 404;
                     return View("Error404");
             }
         }

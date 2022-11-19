@@ -41,5 +41,15 @@ namespace Application.Services.Account.Commands.RegisterUser
             _context.SaveChanges();
             return new ResultDto<int> { Data=newUser.UserId, IsSuccess = true, Message = "ثبت نام شدید" };
         }
+        public class RegisterUserValidation:AbstractValidator<RegisterUserDto>
+        {
+            public RegisterUserValidation()
+            {
+                RuleFor(e => e.Email).EmailAddress().NotEmpty().WithMessage("ایمیل صحیح نیست");
+                RuleFor(e => e.Username).NotEmpty().WithMessage("نام کاربری درست نیست");
+                RuleFor(e => e.Password).NotEmpty().WithMessage("رمز را وارد کنید");
+                RuleFor(e => e.RoleId).NotEmpty().WithMessage("نقش را وارد کنید");
+            }
+        }
     }
 }

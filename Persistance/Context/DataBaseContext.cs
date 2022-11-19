@@ -23,6 +23,8 @@ namespace Persistance.Context
         {
             modelBuilder.Entity<Role>().HasData(new Role { RoleId = (int)BaseRole.Admin, AccessLevel = Enum.GetName(typeof(BaseRole), BaseRole.Admin) });
             modelBuilder.Entity<Role>().HasData(new Role { RoleId = (int)BaseRole.Customer, AccessLevel = Enum.GetName(typeof(BaseRole), BaseRole.Customer) });
+
+            modelBuilder.Entity<User>().HasQueryFilter(e => !e.IsRemoved);
         }
     }
 }
