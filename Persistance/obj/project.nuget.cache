@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "n42QzaPBfythQx4pgP7xsA6IcCD60JVNEO9Y64JZWU/fBLnXHNzCSSWn5JLm+zlwnKgkEABba7zIXk5ZLdHmTg==",
+  "dgSpecHash": "A8nOxPOBw3i208TZuNI/2u/+0ZcLNFEBvlfdcHuZitItmSNtgBV8TDVVGjA3po5kvtUKfeBow8zIlXp5AOpprQ==",
   "success": true,
   "projectFilePath": "D:\\Documents\\Visual Studio 2022\\Projects\\DrShop\\Persistance\\Persistance.csproj",
   "expectedPackageFiles": [
@@ -10,6 +10,8 @@
     "C:\\Users\\Vatar\\.nuget\\packages\\fluentvalidation.aspnetcore\\11.2.2\\fluentvalidation.aspnetcore.11.2.2.nupkg.sha512",
     "C:\\Users\\Vatar\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\11.2.1\\fluentvalidation.dependencyinjectionextensions.11.2.1.nupkg.sha512",
     "C:\\Users\\Vatar\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
+    "C:\\Users\\Vatar\\.nuget\\packages\\mediatr\\11.1.0\\mediatr.11.1.0.nupkg.sha512",
+    "C:\\Users\\Vatar\\.nuget\\packages\\mediatr.contracts\\1.0.1\\mediatr.contracts.1.0.1.nupkg.sha512",
     "C:\\Users\\Vatar\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\7.0.0\\microsoft.aspnetcore.cryptography.internal.7.0.0.nupkg.sha512",
     "C:\\Users\\Vatar\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\7.0.0\\microsoft.aspnetcore.cryptography.keyderivation.7.0.0.nupkg.sha512",
     "C:\\Users\\Vatar\\.nuget\\packages\\microsoft.aspnetcore.http.abstractions\\2.2.0\\microsoft.aspnetcore.http.abstractions.2.2.0.nupkg.sha512",

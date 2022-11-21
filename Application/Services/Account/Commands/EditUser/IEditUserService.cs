@@ -1,30 +1,19 @@
 ﻿using Application.Interfaces;
 using Common;
-using Domain.Entities.Account;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using MediatR;
 
 namespace Application.Services.Account.Commands.EditUser
 {
-    public interface IEditUserService
-    {
-        ResultDto Execute(RequestEditUserDto request);
-    }
-    public class EditUserService : IEditUserService
+    public class EditUserService : IRequestHandler<EditUserDto, ResultDto>
     {
         private readonly IDataBaseContext _context;
         public EditUserService(IDataBaseContext context)
         {
             _context = context;
         }
-
-        public ResultDto Execute(RequestEditUserDto request)
+        public async Task<ResultDto> Handle(EditUserDto request, CancellationToken cancellationToken)
         {
-            var user = _context.Users.Find(request.UserId);
+            var user = await _context.Users.FindAsync(request.UserId);
             if (user != null)
             {
                 user.Username = request.Username;
@@ -34,13 +23,13 @@ namespace Application.Services.Account.Commands.EditUser
                 //Update Time
                 user.UpdateTime = DateTime.Now;
 
-                _context.SaveChanges();
+                await _context.SaveChangesAsync(cancellationToken);
                 return new ResultDto { Message = "اطلاعات ویرایش شد", IsSuccess = true };
             }
             return new ResultDto { Message = "کاربر پیدا نشد" };
         }
     }
-    public class RequestEditUserDto
+    public class EditUserDto : IRequest<ResultDto>
     {
         public int UserId { get; set; }
         public string Username { get; set; }

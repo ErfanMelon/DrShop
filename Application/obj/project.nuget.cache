@@ -1,12 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "bENutL1arrGZ9Qr+CCkNiVhHQdPpZcMEMwpIGptSYIEykuO9c5TdPPRNjuT1GSZ9qQwzjQhdSfICFchZtcsPgQ==",
+  "dgSpecHash": "IJWK/2uV9EUVujRnom+g8L+0S9ylgH05MBANP1vBxX4FCjKqbMzDNaAR2TOiH4mDztW4LClB3ALPxwrtn/CVEA==",
   "success": true,
   "projectFilePath": "D:\\Documents\\Visual Studio 2022\\Projects\\DrShop\\Application\\Application.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Vatar\\.nuget\\packages\\fluentvalidation\\11.3.0\\fluentvalidation.11.3.0.nupkg.sha512",
     "C:\\Users\\Vatar\\.nuget\\packages\\fluentvalidation.aspnetcore\\11.2.2\\fluentvalidation.aspnetcore.11.2.2.nupkg.sha512",
     "C:\\Users\\Vatar\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\11.2.1\\fluentvalidation.dependencyinjectionextensions.11.2.1.nupkg.sha512",
+    "C:\\Users\\Vatar\\.nuget\\packages\\mediatr\\11.1.0\\mediatr.11.1.0.nupkg.sha512",
+    "C:\\Users\\Vatar\\.nuget\\packages\\mediatr.contracts\\1.0.1\\mediatr.contracts.1.0.1.nupkg.sha512",
     "C:\\Users\\Vatar\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\7.0.0\\microsoft.aspnetcore.cryptography.internal.7.0.0.nupkg.sha512",
     "C:\\Users\\Vatar\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\7.0.0\\microsoft.aspnetcore.cryptography.keyderivation.7.0.0.nupkg.sha512",
     "C:\\Users\\Vatar\\.nuget\\packages\\microsoft.aspnetcore.http.abstractions\\2.2.0\\microsoft.aspnetcore.http.abstractions.2.2.0.nupkg.sha512",

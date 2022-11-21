@@ -1,19 +1,10 @@
 ﻿using Application.Interfaces;
 using Common;
-using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using MediatR;
 
 namespace Application.Services.Account.Queries.LoginUser
 {
-    public interface ILoginUserService
-    {
-        ResultDto<UserLoginDetailDto> Execute(RequestUserLoginDto request);
-    }
-    public class LoginUserService : ILoginUserService
+    public class LoginUserService : IRequestHandler<RequestUserLoginDto, ResultDto<UserLoginDetailDto>>
     {
         private readonly IDataBaseContext _context;
         public LoginUserService(IDataBaseContext context)
@@ -21,7 +12,7 @@ namespace Application.Services.Account.Queries.LoginUser
             _context = context;
         }
 
-        public ResultDto<UserLoginDetailDto> Execute(RequestUserLoginDto request)
+        public Task<ResultDto<UserLoginDetailDto>> Handle(RequestUserLoginDto request, CancellationToken cancellationToken)
         {
             PasswordHasher passwordHasher = new PasswordHasher();
 
@@ -31,7 +22,7 @@ namespace Application.Services.Account.Queries.LoginUser
                 bool truePassword = passwordHasher.VerifyPassword(user.Password, request.Password);
                 if (truePassword)
                 {
-                    return new ResultDto<UserLoginDetailDto>
+                    return Task.FromResult(new ResultDto<UserLoginDetailDto>
                     {
                         Data = new UserLoginDetailDto
                         {
@@ -41,15 +32,14 @@ namespace Application.Services.Account.Queries.LoginUser
                         },
                         IsSuccess = true,
                         Message = "خوش آمدید"
-                    };
+                    });
                 }
-                return new ResultDto<UserLoginDetailDto> { Message = "رمز عبور اشتباه است" };
+                return Task.FromResult(new ResultDto<UserLoginDetailDto> { Message = "رمز عبور اشتباه است" });
             }
-            return new ResultDto<UserLoginDetailDto> { Message = "کاربری یافت نشد" };
-
+            return Task.FromResult(new ResultDto<UserLoginDetailDto> { Message = "کاربری یافت نشد" });
         }
     }
-    public class RequestUserLoginDto
+    public class RequestUserLoginDto : IRequest<ResultDto<UserLoginDetailDto>>
     {
         public string Email { get; set; }
         public string Password { get; set; }

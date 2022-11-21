@@ -1,4 +1,5 @@
-﻿using Application.Interfaces;
+﻿using Application;
+using Application.Interfaces;
 using Application.Services.Account.Commands.DeleteUser;
 using Application.Services.Account.Commands.EditUser;
 using Application.Services.Account.Commands.RegisterUser;
@@ -6,6 +7,7 @@ using Application.Services.Account.Queries.GetUserForEdit;
 using Application.Services.Account.Queries.GetUsers;
 using Application.Services.Account.Queries.LoginUser;
 using Common;
+using MediatR;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using Persistance.Context;
@@ -22,13 +24,8 @@ builder.Services.AddDbContext<DataBaseContext>(options =>
 // Database Services
 builder.Services.AddScoped<IDataBaseContext, DataBaseContext>();
 
-// User Services
-builder.Services.AddScoped<IRegisterUserService, RegisterUserService>(); // ثبت نام کاربران
-builder.Services.AddScoped<ILoginUserService, LoginUserService>(); // ورود کاربران
-builder.Services.AddScoped<IGetUsersService, GetUsersService>(); // لیستی از کاربران (Admin)
-builder.Services.AddScoped<IGetUserService, GetUserService>(); // مشخصات کاربر (Admin)
-builder.Services.AddScoped<IEditUserService, EditUserService>(); // ویرایش کاربر (Admin)
-builder.Services.AddScoped<IDeleteUserService, DeleteUserService>(); // حذف کاربر (Admin)
+// Implement MediatR DesignPattern
+builder.Services.AddMediatR(typeof(MediatorStartup).Assembly);
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "/6s/WLvYEuYJWyPX/lBWqu2/5bQ6B/zpuow+FfW1dSQcqsNvWZUsdp3IEFqpZ50WNvaNa9beb2QngeG+5XqG+g==",
+  "dgSpecHash": "4f2sP/Sl43wTa3T38lrWBiFkfKV3nh2lT7mGIcJOVF5Rl/4Su/NDY+gP6YxGargyALfP0z0Mh2hkH7euC7SKbg==",
   "success": true,
   "projectFilePath": "D:\\Documents\\Visual Studio 2022\\Projects\\DrShop\\Dr_Shop\\Dr_Shop.csproj",
   "expectedPackageFiles": [
@@ -11,6 +11,9 @@
     "C:\\Users\\Vatar\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\11.2.1\\fluentvalidation.dependencyinjectionextensions.11.2.1.nupkg.sha512",
     "C:\\Users\\Vatar\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\Vatar\\.nuget\\packages\\lazziya.taghelpers\\2.2.0\\lazziya.taghelpers.2.2.0.nupkg.sha512",
+    "C:\\Users\\Vatar\\.nuget\\packages\\mediatr\\11.1.0\\mediatr.11.1.0.nupkg.sha512",
+    "C:\\Users\\Vatar\\.nuget\\packages\\mediatr.contracts\\1.0.1\\mediatr.contracts.1.0.1.nupkg.sha512",
+    "C:\\Users\\Vatar\\.nuget\\packages\\mediatr.extensions.microsoft.dependencyinjection\\11.0.0\\mediatr.extensions.microsoft.dependencyinjection.11.0.0.nupkg.sha512",
     "C:\\Users\\Vatar\\.nuget\\packages\\messagepack\\2.1.152\\messagepack.2.1.152.nupkg.sha512",
     "C:\\Users\\Vatar\\.nuget\\packages\\messagepack.annotations\\2.1.152\\messagepack.annotations.2.1.152.nupkg.sha512",
     "C:\\Users\\Vatar\\.nuget\\packages\\messagepackanalyzer\\2.1.152\\messagepackanalyzer.2.1.152.nupkg.sha512",

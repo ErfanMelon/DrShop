@@ -2,6 +2,7 @@
 using Application.Services.Account.Queries.LoginUser;
 using Common;
 using Dr_Shop.Models.UserViewModels;
+using MediatR;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
@@ -11,12 +12,11 @@ namespace Dr_Shop.Controllers
 {
     public class UserController : Controller
     {
-        private readonly IRegisterUserService _registerUserService;
-        private readonly ILoginUserService _loginUserService;
-        public UserController(IRegisterUserService registerUserService, ILoginUserService loginUserService)
+        private readonly IMediator _mediator;
+
+        public UserController(IMediator mediator)
         {
-            _registerUserService = registerUserService;
-            _loginUserService = loginUserService;
+            _mediator = mediator;
         }
 
         [HttpGet("/Login")]
@@ -32,7 +32,7 @@ namespace Dr_Shop.Controllers
             var validation = validationRules.Validate(model); // validate LoginViewModel using FluentValidation
             if (validation.IsValid)
             {
-                result = _loginUserService.Execute(new RequestUserLoginDto
+                result = await _mediator.Send(new RequestUserLoginDto
                 {
                     Email = model.Email.Trim(),
                     Password = model.Password
@@ -65,7 +65,7 @@ namespace Dr_Shop.Controllers
             var validation = validationRules.Validate(model); // validate SignupViewModel using FluentValidation
             if (validation.IsValid)
             {
-                result = _registerUserService.Execute(new RegisterUserDto
+                result = await _mediator.Send(new RegisterUserDto
                 {
                     Email = model.Email.Trim(),
                     Password = model.Password,

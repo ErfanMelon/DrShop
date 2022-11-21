@@ -1,12 +1,11 @@
 ﻿using Application.Interfaces;
 using Common;
+using MediatR;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Application.Services.Account.Queries.GetUsers
 {
-    public interface IGetUsersService
-    {
-        ResultDto<UsersDto> Execute(int page, int pagesize);
-    }
+    public record GetUsersServiceDto(int page, int pagesize) : IRequest<ResultDto<UsersDto>>;
     public class GetUserDto
     {
         public int UserId { get; set; }
@@ -19,7 +18,7 @@ namespace Application.Services.Account.Queries.GetUsers
         public List<GetUserDto> Users { get; set; }
         public int RowCount { get; set; }
     }
-    public class GetUsersService : IGetUsersService
+    public class GetUsersService : IRequestHandler<GetUsersServiceDto, ResultDto<UsersDto>>
     {
         private readonly IDataBaseContext _context;
         public GetUsersService(IDataBaseContext context)
@@ -27,10 +26,10 @@ namespace Application.Services.Account.Queries.GetUsers
             _context = context;
         }
 
-        public ResultDto<UsersDto> Execute(int page, int pagesize)
+        public Task<ResultDto<UsersDto>> Handle(GetUsersServiceDto request, CancellationToken cancellationToken)
         {
             var Users = _context.Users.AsQueryable();
-            var result = Users.ToPaged(page, pagesize, out int rowsCount)
+            var result = Users.ToPaged(request.page, request.pagesize, out int rowsCount)
                 .Select(u => new GetUserDto
                 {
                     Email = u.Email,
@@ -40,16 +39,16 @@ namespace Application.Services.Account.Queries.GetUsers
                 });
             // default value for empty result
             result = result.DefaultIfEmpty(new GetUserDto { Email = " - ", Role = " - ", UserId = 0, Username = "داده ای موجود نیست" });
-            
-            return new ResultDto<UsersDto>
+
+            return Task.FromResult(new ResultDto<UsersDto>
             {
                 Data = new UsersDto
                 {
-                    Users =result.ToList(),
+                    Users = result.ToList(),
                     RowCount = rowsCount,
                 },
                 IsSuccess = true,
-            };
+            });
         }
     }
 }

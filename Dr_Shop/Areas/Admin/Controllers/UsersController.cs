@@ -4,13 +4,9 @@ using Application.Services.Account.Commands.RegisterUser;
 using Application.Services.Account.Queries.GetUserForEdit;
 using Application.Services.Account.Queries.GetUsers;
 using Common;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using static Application.Services.Account.Commands.RegisterUser.RegisterUserService;
 
 namespace Dr_Shop.Areas.Admin.Controllers
@@ -18,53 +14,40 @@ namespace Dr_Shop.Areas.Admin.Controllers
     [Area("Admin")]
     public class UsersController : Controller
     {
-        private readonly IGetUsersService _getUsersService;
-        private readonly IGetUserService _getUserService;
-        private readonly IEditUserService _editUserService;
-        private readonly IDeleteUserService _deleteUserService;
-        private readonly IRegisterUserService _registerUserService;
-        public UsersController(IGetUsersService getUsersService, IGetUserService getUserService, IEditUserService editUserService, IDeleteUserService deleteUserService, IRegisterUserService registerUserService)
+        private readonly IMediator _mediator;
+
+        public UsersController(IMediator mediator)
         {
-            _getUsersService = getUsersService;
-            _getUserService = getUserService;
-            _editUserService = editUserService;
-            _deleteUserService = deleteUserService;
-            _registerUserService = registerUserService;
+            _mediator = mediator;
         }
 
-        public IActionResult Index(int page = 1, int pagesize = 20)
+        public async Task<IActionResult> Index(int page = 1, int pagesize = 20)
         {
-            var result = _getUsersService.Execute(page, pagesize);
+            var result = await _mediator.Send(new GetUsersServiceDto(page, pagesize));
             ViewBag.CurrentPage = page;
             ViewBag.PageSize = pagesize;
-
             return View(result.Data);
         }
-        public IActionResult Edit(int id)
+        public async Task<IActionResult> Edit(int id)
         {
-            var result = _getUserService.Execute(id);
+            var result = await _mediator.Send(new Application.Services.Account.Queries.GetUserForEdit.GetUserDto(id));
             if (result.IsSuccess)
             {
-                ViewBag.Roles = new SelectList(Enum.GetValues(typeof(BaseRole)).Cast<BaseRole>().Select(e => new SelectListItem
-                {
-                    Text = e.ToString(),
-                    Value = ((int)e).ToString()
-                }), "Value", "Text");
+                GetRolesForSelectList();
                 return View(result.Data);
             }
-
             TempData["Error"] = result.Message;
             return BadRequest();
         }
         [HttpPost]
-        public IActionResult Edit(UserDto model)
+        public async Task<IActionResult> Edit(UserDto model)
         {
             ResultDto result;
             UserDtoValidation validationRules = new UserDtoValidation();
             var validModel = validationRules.Validate(model);
             if (validModel.IsValid)
             {
-                result = _editUserService.Execute(new RequestEditUserDto
+                result = await _mediator.Send(new EditUserDto
                 {
                     Email = model.Email,
                     Role = model.Role,
@@ -76,44 +59,35 @@ namespace Dr_Shop.Areas.Admin.Controllers
                     TempData["Success"] = result.Message;
                     return RedirectToAction("Index", "Users");
                 }
-
             }
             else
             {
                 result = new ResultDto { Message = validModel.Errors[0].ErrorMessage };
             }
-            ViewBag.Roles = new SelectList(Enum.GetValues(typeof(BaseRole)).Cast<BaseRole>().Select(e => new SelectListItem
-            {
-                Text = e.ToString(),
-                Value = ((int)e).ToString()
-            }), "Value", "Text");
+            GetRolesForSelectList();
             ViewBag.Error = result.Message;
             return View(model);
         }
         [HttpPost]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            var result = _deleteUserService.Execute(id);
+            var result = await _mediator.Send(new RequestDeleteUser(id));
             return Json(result);
         }
         public IActionResult Create()
         {
-            ViewBag.Roles = new SelectList(Enum.GetValues(typeof(BaseRole)).Cast<BaseRole>().Select(e => new SelectListItem
-            {
-                Text = e.ToString(),
-                Value = ((int)e).ToString()
-            }), "Value", "Text");
+            GetRolesForSelectList();
             return View();
         }
         [HttpPost]
-        public IActionResult Create(RegisterUserDto model)
+        public async Task<IActionResult> Create(RegisterUserDto model)
         {
             ResultDto<int> result;
             RegisterUserValidation validationRules = new RegisterUserValidation();
             var validation = validationRules.Validate(model);
             if (validation.IsValid)
             {
-                result = _registerUserService.Execute(model);
+                result = await _mediator.Send(model);
                 if (result.IsSuccess)
                 {
                     TempData["Success"] = result.Message;
@@ -124,13 +98,20 @@ namespace Dr_Shop.Areas.Admin.Controllers
             {
                 result = new ResultDto<int> { Message = validation.Errors[0].ErrorMessage };
             }
+            GetRolesForSelectList();
+            ViewBag.Error = result.Message;
+            return View(model);
+        }
+        /// <summary>
+        /// Get Roles From Enum
+        /// </summary>
+        private void GetRolesForSelectList()
+        {
             ViewBag.Roles = new SelectList(Enum.GetValues(typeof(BaseRole)).Cast<BaseRole>().Select(e => new SelectListItem
             {
                 Text = e.ToString(),
                 Value = ((int)e).ToString()
             }), "Value", "Text");
-            ViewBag.Error = result.Message;
-            return View(model);
         }
     }
 }

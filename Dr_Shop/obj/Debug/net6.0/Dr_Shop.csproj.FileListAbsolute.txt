@@ -308,3 +308,6 @@ D:\Documents\Visual Studio 2022\Projects\DrShop\Dr_Shop\bin\Debug\net6.0\System.
 D:\Documents\Visual Studio 2022\Projects\DrShop\Dr_Shop\bin\Debug\net6.0\System.Text.Encodings.Web.dll
 D:\Documents\Visual Studio 2022\Projects\DrShop\Dr_Shop\bin\Debug\net6.0\System.Text.Json.dll
 D:\Documents\Visual Studio 2022\Projects\DrShop\Dr_Shop\bin\Debug\net6.0\runtimes\browser\lib\net6.0\System.Text.Encodings.Web.dll
+D:\Documents\Visual Studio 2022\Projects\DrShop\Dr_Shop\bin\Debug\net6.0\MediatR.dll
+D:\Documents\Visual Studio 2022\Projects\DrShop\Dr_Shop\bin\Debug\net6.0\MediatR.Contracts.dll
+D:\Documents\Visual Studio 2022\Projects\DrShop\Dr_Shop\bin\Debug\net6.0\MediatR.Extensions.Microsoft.DependencyInjection.dll

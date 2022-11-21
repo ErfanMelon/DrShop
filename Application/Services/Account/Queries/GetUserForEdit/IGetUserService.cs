@@ -1,19 +1,12 @@
 ﻿using Application.Interfaces;
 using Common;
 using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using MediatR;
 
 namespace Application.Services.Account.Queries.GetUserForEdit
 {
-    public interface IGetUserService
-    {
-        ResultDto<UserDto> Execute(int userId);
-    }
-    public class GetUserService : IGetUserService
+    public record GetUserDto(int UserId) : IRequest<ResultDto<UserDto>>;
+    public class GetUserService : IRequestHandler<GetUserDto, ResultDto<UserDto>>
     {
         private readonly IDataBaseContext _context;
         public GetUserService(IDataBaseContext context)
@@ -21,9 +14,9 @@ namespace Application.Services.Account.Queries.GetUserForEdit
             _context = context;
         }
 
-        public ResultDto<UserDto> Execute(int userId)
+        public Task<ResultDto<UserDto>> Handle(GetUserDto request, CancellationToken cancellationToken)
         {
-            var user = _context.Users.Find(userId);
+            var user =_context.Users.Find(request.UserId);
             if (user != null)
             {
                 UserDto resultUser = new UserDto
@@ -33,9 +26,9 @@ namespace Application.Services.Account.Queries.GetUserForEdit
                     Role = (BaseRole)user.RoleId,
                     Username = user.Username
                 };
-                return new ResultDto<UserDto> { Data = resultUser, IsSuccess = true };
+                return Task.FromResult(new ResultDto<UserDto> { Data = resultUser, IsSuccess = true });
             }
-            return new ResultDto<UserDto> { Message = "کاربر پیدا نشد" };
+            return Task.FromResult(new ResultDto<UserDto> { Message = "کاربر پیدا نشد" });
         }
     }
     public class UserDto
@@ -45,7 +38,7 @@ namespace Application.Services.Account.Queries.GetUserForEdit
         public string Email { get; set; }
         public BaseRole Role { get; set; }
     }
-    public class UserDtoValidation:AbstractValidator<UserDto>
+    public class UserDtoValidation : AbstractValidator<UserDto>
     {
         public UserDtoValidation()
         {
