@@ -14,7 +14,7 @@ namespace Application.Services.Account.Commands.RegisterUser
         public string Username { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        public int RoleId { get; set; }
+        public BaseRole Role { get; set; }
     }
     public class RegisterUserService : IRegisterUserService
     {
@@ -35,7 +35,7 @@ namespace Application.Services.Account.Commands.RegisterUser
             newUser.Username = request.Username;
             newUser.Email = request.Email;
             PasswordHasher hasher = new PasswordHasher();
-            newUser.RoleId = request.RoleId;
+            newUser.RoleId = (int)request.Role;
             newUser.Password = hasher.HashPassword(request.Password);
             _context.Users.Add(newUser);
             _context.SaveChanges();
@@ -48,7 +48,7 @@ namespace Application.Services.Account.Commands.RegisterUser
                 RuleFor(e => e.Email).EmailAddress().NotEmpty().WithMessage("ایمیل صحیح نیست");
                 RuleFor(e => e.Username).NotEmpty().WithMessage("نام کاربری درست نیست");
                 RuleFor(e => e.Password).NotEmpty().WithMessage("رمز را وارد کنید");
-                RuleFor(e => e.RoleId).NotEmpty().WithMessage("نقش را وارد کنید");
+                RuleFor(e => e.Role).IsInEnum().WithMessage("نقش را وارد کنید");
             }
         }
     }

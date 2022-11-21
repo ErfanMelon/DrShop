@@ -69,7 +69,7 @@ namespace Dr_Shop.Controllers
                 {
                     Email = model.Email.Trim(),
                     Password = model.Password,
-                    RoleId = (int)BaseRole.Customer,
+                    Role = BaseRole.Customer,
                     Username = model.Username.Trim(),
                 });
                 if (result.IsSuccess)

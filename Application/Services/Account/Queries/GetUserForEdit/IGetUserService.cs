@@ -30,7 +30,7 @@ namespace Application.Services.Account.Queries.GetUserForEdit
                 {
                     UserId = user.UserId,
                     Email = user.Email,
-                    RoleId = user.RoleId,
+                    Role = (BaseRole)user.RoleId,
                     Username = user.Username
                 };
                 return new ResultDto<UserDto> { Data = resultUser, IsSuccess = true };
@@ -43,7 +43,7 @@ namespace Application.Services.Account.Queries.GetUserForEdit
         public int UserId { get; set; }
         public string Username { get; set; }
         public string Email { get; set; }
-        public int RoleId { get; set; }
+        public BaseRole Role { get; set; }
     }
     public class UserDtoValidation:AbstractValidator<UserDto>
     {
@@ -53,7 +53,7 @@ namespace Application.Services.Account.Queries.GetUserForEdit
             RuleFor(e => e.Username).NotEmpty().WithMessage("نام کاربری را وارد کنید");
             RuleFor(e => e.Email).EmailAddress().WithMessage("ایمیل معتبر نیست");
             RuleFor(e => e.Email).NotEmpty().WithMessage("ایمیل را وارد کنید");
-            RuleFor(e => e.RoleId).NotEmpty().WithMessage("سطح دسترسی معتبر نیست");
+            RuleFor(e => e.Role).IsInEnum().WithMessage("سطح دسترسی معتبر نیست");
         }
     }
 }

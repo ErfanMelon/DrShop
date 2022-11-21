@@ -10,7 +10,6 @@ namespace Application.Interfaces
 {
     public interface IDataBaseContext
     {
-        DbSet<Role> Roles { get; set; }
         DbSet<User> Users { get; set; }
 
         int SaveChanges(bool acceptAllChangesOnSuccess);

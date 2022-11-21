@@ -33,11 +33,7 @@ namespace Domain.Entities.Account
         [DataType(DataType.Password)]
         public string Password { get; set; }
         /// <summary>
-        /// سطح دسترسی کاربر
-        /// </summary>
-        public virtual Role Role { get; set; }
-        /// <summary>
-        /// شناسه سطح دسترسی کاربر
+        ///  سطح دسترسی کاربر
         /// </summary>
         public int RoleId { get; set; }
     }

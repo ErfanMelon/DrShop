@@ -67,7 +67,7 @@ namespace Dr_Shop.Areas.Admin.Controllers
                 result = _editUserService.Execute(new RequestEditUserDto
                 {
                     Email = model.Email,
-                    RoleId = model.RoleId,
+                    Role = model.Role,
                     UserId = model.UserId,
                     Username = model.Username
                 });
