@@ -2870,7 +2870,8 @@
       },
       "Common/1.0.0": {
         "dependencies": {
-          "Microsoft.AspNetCore.Cryptography.KeyDerivation": "7.0.0"
+          "Microsoft.AspNetCore.Cryptography.KeyDerivation": "7.0.0",
+          "Microsoft.EntityFrameworkCore": "7.0.0"
         },
         "runtime": {
           "Common.dll": {}

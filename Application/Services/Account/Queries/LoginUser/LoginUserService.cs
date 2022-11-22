@@ -1,10 +1,11 @@
 ﻿using Application.Interfaces;
 using Common;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Services.Account.Queries.LoginUser
 {
-    public class LoginUserService : IRequestHandler<RequestUserLoginDto, ResultDto<UserLoginDetailDto>>
+    public class LoginUserService : IRequestHandler<RequestUserLogin, ResultDto<UserLoginDetailDto>>
     {
         private readonly IDataBaseContext _context;
         public LoginUserService(IDataBaseContext context)
@@ -12,11 +13,13 @@ namespace Application.Services.Account.Queries.LoginUser
             _context = context;
         }
 
-        public Task<ResultDto<UserLoginDetailDto>> Handle(RequestUserLoginDto request, CancellationToken cancellationToken)
+        public Task<ResultDto<UserLoginDetailDto>> Handle(RequestUserLogin request, CancellationToken cancellationToken)
         {
             PasswordHasher passwordHasher = new PasswordHasher();
 
-            var user = _context.Users.FirstOrDefault(e => e.Email == request.Email);
+            var user = _context.Users
+                .AsNoTracking()
+                .FirstOrDefault(e => e.Email == request.Email);
             if (user != null)
             {
                 bool truePassword = passwordHasher.VerifyPassword(user.Password, request.Password);
@@ -38,16 +41,5 @@ namespace Application.Services.Account.Queries.LoginUser
             }
             return Task.FromResult(new ResultDto<UserLoginDetailDto> { Message = "کاربری یافت نشد" });
         }
-    }
-    public class RequestUserLoginDto : IRequest<ResultDto<UserLoginDetailDto>>
-    {
-        public string Email { get; set; }
-        public string Password { get; set; }
-    }
-    public class UserLoginDetailDto
-    {
-        public int UserId { get; set; }
-        public string Username { get; set; }
-        public string Role { get; set; }
     }
 }

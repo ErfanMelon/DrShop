@@ -1,4 +1,4 @@
-﻿@model UsersDto
+﻿@model PaginationDto<GetUserDto>
 @section Css{
     <link href="~/adminassets/plugins/sweetalert2/sweetalert2.min.css" rel="stylesheet" />
 }
@@ -17,7 +17,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                @foreach (var item in Model.Users)
+                @foreach (var item in Model.Items)
                 {
                     <tr>
                         <th scope="row">@item.UserId</th>
@@ -33,9 +33,9 @@
                 }
             </tbody>
         </table>
-        <paging total-records="Model.RowCount"
-                page-no="@ViewBag.CurrentPage"
-                page-size="@ViewBag.PageSize"
+        <paging total-records="Model.TotalCount"
+                page-no="Model.PageNumber"
+                page-size="Model.PageSize"
                 show-prev-next="true"
                 sr-text-first="ابتدا"
                 sr-text-last="انتها"

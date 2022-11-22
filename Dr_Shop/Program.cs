@@ -1,11 +1,5 @@
 ﻿using Application;
 using Application.Interfaces;
-using Application.Services.Account.Commands.DeleteUser;
-using Application.Services.Account.Commands.EditUser;
-using Application.Services.Account.Commands.RegisterUser;
-using Application.Services.Account.Queries.GetUserForEdit;
-using Application.Services.Account.Queries.GetUsers;
-using Application.Services.Account.Queries.LoginUser;
 using Common;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.Cookies;

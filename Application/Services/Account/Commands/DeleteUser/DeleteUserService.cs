@@ -4,7 +4,6 @@ using MediatR;
 
 namespace Application.Services.Account.Commands.DeleteUser
 {
-    public record RequestDeleteUser(int UserId) : IRequest<ResultDto>;
     public class DeleteUserService : IRequestHandler<RequestDeleteUser, ResultDto>
     {
         private readonly IDataBaseContext _context;
@@ -18,9 +17,8 @@ namespace Application.Services.Account.Commands.DeleteUser
             var user = await _context.Users.FindAsync(request.UserId);
             if (user != null)
             {
-                user.RemoveTime = DateTime.Now;
-                user.IsRemoved = true;
-                await _context.SaveChangesAsync(cancellationToken);
+                _context.Users.Remove(user);
+                await _context.SaveChangesAsync();
                 return new ResultDto { IsSuccess = true, Message = "کاربر حذف شد" };
             }
             return new ResultDto { Message = "کاربر پیدا نشد" };

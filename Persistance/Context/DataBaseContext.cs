@@ -1,26 +1,56 @@
 ﻿using Application.Interfaces;
-using Common;
 using Domain.Entities.Account;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Persistance.Configurations;
 
 namespace Persistance.Context
 {
-    public class DataBaseContext:DbContext, IDataBaseContext
+    public class DataBaseContext : DbContext, IDataBaseContext
     {
-        public DataBaseContext(DbContextOptions options):base(options)  
+        public DataBaseContext(DbContextOptions options) : base(options)
         {
 
+        }
+        // override SaveChangeAsync() to include updatetime,removetime,inserttime,isremoved to entity
+        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken)
+        {
+            var entries = ChangeTracker
+                .Entries()
+                .Where(
+                e => e.State == EntityState.Added ||
+                e.State == EntityState.Modified ||
+                e.State == EntityState.Deleted);
+            foreach (var entityEntry in entries)
+            {
+                switch (entityEntry.State)
+                {
+                    case EntityState.Detached:
+                        break;
+                    case EntityState.Unchanged:
+                        break;
+                    case EntityState.Deleted:
+                        entityEntry.Property("RemoveTime").CurrentValue = DateTime.Now;
+                        entityEntry.Property("IsRemoved").CurrentValue = true;
+                        entityEntry.State = EntityState.Modified;
+                        break;
+                    case EntityState.Modified:
+                        entityEntry.Property("UpdateTime").CurrentValue = DateTime.Now;
+                        break;
+                    case EntityState.Added:
+                        entityEntry.Property("InsertTime").CurrentValue = DateTime.Now;
+                        entityEntry.Property("IsRemoved").CurrentValue = false;
+                        break;
+                    default:
+                        break;
+                }
+            }
+            return await base.SaveChangesAsync();
         }
         public DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<User>().HasQueryFilter(e => !e.IsRemoved);
+            new UserConfig().Configure(modelBuilder.Entity<User>()); // Config for User
         }
     }
 }

@@ -32,7 +32,7 @@ namespace Dr_Shop.Controllers
             var validation = validationRules.Validate(model); // validate LoginViewModel using FluentValidation
             if (validation.IsValid)
             {
-                result = await _mediator.Send(new RequestUserLoginDto
+                result = await _mediator.Send(new RequestUserLogin
                 {
                     Email = model.Email.Trim(),
                     Password = model.Password
@@ -65,7 +65,7 @@ namespace Dr_Shop.Controllers
             var validation = validationRules.Validate(model); // validate SignupViewModel using FluentValidation
             if (validation.IsValid)
             {
-                result = await _mediator.Send(new RegisterUserDto
+                result = await _mediator.Send(new RequestRegisterUser
                 {
                     Email = model.Email.Trim(),
                     Password = model.Password,

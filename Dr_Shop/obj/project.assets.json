@@ -4592,7 +4592,8 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
-          "Microsoft.AspNetCore.Cryptography.KeyDerivation": "7.0.0"
+          "Microsoft.AspNetCore.Cryptography.KeyDerivation": "7.0.0",
+          "Microsoft.EntityFrameworkCore": "7.0.0"
         },
         "compile": {
           "bin/placeholder/Common.dll": {}

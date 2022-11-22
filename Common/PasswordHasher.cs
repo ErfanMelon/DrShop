@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 namespace Common
 {
     /// <summary>
-    /// کلاسی برای رمزگذاری و رمزنگاری گذرواژه
+    /// a class for encrypt and decrypt password
     /// </summary>
     public class  PasswordHasher
     {

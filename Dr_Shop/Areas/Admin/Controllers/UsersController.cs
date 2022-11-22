@@ -23,14 +23,12 @@ namespace Dr_Shop.Areas.Admin.Controllers
 
         public async Task<IActionResult> Index(int page = 1, int pagesize = 20)
         {
-            var result = await _mediator.Send(new GetUsersServiceDto(page, pagesize));
-            ViewBag.CurrentPage = page;
-            ViewBag.PageSize = pagesize;
+            var result = await _mediator.Send(new RequestGetUsers(page, pagesize));
             return View(result.Data);
         }
         public async Task<IActionResult> Edit(int id)
         {
-            var result = await _mediator.Send(new Application.Services.Account.Queries.GetUserForEdit.GetUserDto(id));
+            var result = await _mediator.Send(new RequestGetUser(id));
             if (result.IsSuccess)
             {
                 GetRolesForSelectList();
@@ -47,12 +45,12 @@ namespace Dr_Shop.Areas.Admin.Controllers
             var validModel = validationRules.Validate(model);
             if (validModel.IsValid)
             {
-                result = await _mediator.Send(new EditUserDto
+                result = await _mediator.Send(new RequestEditUser
                 {
-                    Email = model.Email,
+                    Email = model.Email.Trim(),
                     Role = model.Role,
                     UserId = model.UserId,
-                    Username = model.Username
+                    Username = model.Username.Trim(),
                 });
                 if (result.IsSuccess)
                 {
@@ -80,14 +78,20 @@ namespace Dr_Shop.Areas.Admin.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> Create(RegisterUserDto model)
+        public async Task<IActionResult> Create(RequestRegisterUser model)
         {
             ResultDto<int> result;
             RegisterUserValidation validationRules = new RegisterUserValidation();
             var validation = validationRules.Validate(model);
             if (validation.IsValid)
             {
-                result = await _mediator.Send(model);
+                result = await _mediator.Send(new RequestRegisterUser
+                {
+                    Email = model.Email.Trim(),
+                    Role = model.Role,
+                    Username = model.Username.Trim(),
+                    Password=model.Password,
+                });
                 if (result.IsSuccess)
                 {
                     TempData["Success"] = result.Message;

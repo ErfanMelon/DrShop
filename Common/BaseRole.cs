@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace Common
 {
+    /// <summary>
+    /// User's Access Level
+    /// </summary>
     public enum BaseRole:int
     {
         [Display(Name ="ادمین")]

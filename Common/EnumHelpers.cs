@@ -4,9 +4,9 @@ using System.Reflection;
 namespace Common
 {
     /// <summary>
-    /// کلاسی برای کار با ثابت ها
+    /// A class for working with Enum
     /// </summary>
-    /// <typeparam name="T">نوع ثابت</typeparam>
+    /// <typeparam name="T">Type of enum</typeparam>
     public static class EnumHelpers<T>
     {
         public static IList<T> GetValues(Enum value)
@@ -49,9 +49,9 @@ namespace Common
             return resourceKey; // Fallback with the key name
         }
         /// <summary>
-        /// گرفتن نام نمایشی ثابت
+        /// get enum's [Display(Name="value")] => value
         /// </summary>
-        /// <param name="value">ثابت</param>
+        /// <param name="value">Enum</param>
         /// <returns></returns>
         public static string GetDisplayValue(T value)
         {

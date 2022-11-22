@@ -7,15 +7,15 @@ using System.Threading.Tasks;
 namespace Common
 {
     /// <summary>
-    /// برای ارسال داده بین کنترلر ها و سرویس ها
+    /// DataTransfareObject for exchange data between classes and controllers
     /// </summary>
-    /// <typeparam name="T">داده قابل نمایش برای کاربر</typeparam>
+    /// <typeparam name="T">Data</typeparam>
     public class ResultDto<T>:ResultDto
     {
         public T Data { get; set; }
     }
     /// <summary>
-    /// برای ارسال داده بین کنترلر ها و سرویس ها
+    ///  DataTransfareObject for result data exchange between classes and controllers
     /// </summary>
     public class ResultDto
     {
