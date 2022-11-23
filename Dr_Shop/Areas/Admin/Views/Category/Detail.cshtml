@@ -1,0 +1,32 @@
+﻿@model CategoryDto
+@{
+    Layout = null;
+}
+<div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"> جزئیات دسته بندی <b>@Model.CategoryName</b></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+        @{
+            string parent = Model.ParentCategory != "ندارد" ? $"شامل زیر مجموعه دسته بندی {Model.ParentCategory} میباشد" : "زیر مجموعه هیچ دسته بندی نیست";
+            bool hasChild = Model.SubCategories.Any();
+        }
+        <p>@parent</p>
+        @if (hasChild)
+        {
+            <p>دارای <b>@Model.SubCategories.Count</b> دسته بندی زیر مجموعه میباشد</p>
+            @foreach (string child in Model.SubCategories)
+            {
+                <span class="badge rounded-pill bg-light text-dark">@child</span>
+            }
+        }
+        else
+        {
+            <p>هیچ دسته بندی شامل آن <b>نیست</b></p>
+        }
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">بستن</button>
+    </div>
+</div>

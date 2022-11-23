@@ -1,0 +1,52 @@
+﻿@model RequestAddCategory
+<div class="card">
+    <div class="card-body">
+        <form asp-action="Create" method="post">
+            <div class="input-group input-group-sm mb-3">
+                <span class="input-group-text">نام دسته بندی</span>
+                <input id="categoryname" type="text" asp-for="categoryName" class="form-control" aria-label="Sizing example input" aria-describedby="categoryname">
+            </div>
+            <div class="input-group mb-3">
+                <label class="input-group-text" for="parentcategory">دسته بندی والد</label>
+                <select class="form-select" id="parentcategory" asp-for="parentCategoryId" asp-items="ViewBag.ParentCategories">
+                </select>
+            </div>
+            <button type="submit" class="btn btn-success px-5"><i class="bx bx-add-to-queue mr-1"></i>افزودن</button>
+        </form>
+    </div>
+</div>
+@section Scripts{
+    @if (TempData["Success"] != null)
+    {
+        <script>
+            $("#categoryname").val('').change();
+            $("#parentcategory").val('0').change();
+            Lobibox.notify('success', {
+                pauseDelayOnHover: true,
+                size: 'mini',
+                rounded: true,
+                delayIndicator: false,
+                icon: 'bx bx-check-circle',
+                continueDelayOnInactiveTab: false,
+                position: 'top left',
+                msg: '@TempData["Success"]'
+            });
+
+        </script>
+    }
+    @if (ViewBag.Error != null)
+    {
+        <script>
+            Lobibox.notify('warning', {
+                pauseDelayOnHover: true,
+                size: 'mini',
+                rounded: true,
+                delayIndicator: false,
+                icon: 'bx bx-error',
+                continueDelayOnInactiveTab: false,
+                position: 'top left',
+                msg: '@ViewBag.Error'
+            });
+        </script>
+    }
+}

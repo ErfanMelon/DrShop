@@ -1,5 +1,6 @@
 ﻿using Application.Interfaces;
 using Domain.Entities.Account;
+using Domain.Entities.Product;
 using Microsoft.EntityFrameworkCore;
 using Persistance.Configurations;
 
@@ -47,10 +48,12 @@ namespace Persistance.Context
             return await base.SaveChangesAsync();
         }
         public DbSet<User> Users { get; set; }
+        public DbSet<Category> Categories { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             new UserConfig().Configure(modelBuilder.Entity<User>()); // Config for User
+            new CategoryConfig().Configure(modelBuilder.Entity<Category>()); // Config for Category
         }
     }
 }

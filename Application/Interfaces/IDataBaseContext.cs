@@ -1,4 +1,5 @@
 ﻿using Domain.Entities.Account;
+using Domain.Entities.Product;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ namespace Application.Interfaces
     public interface IDataBaseContext
     {
         DbSet<User> Users { get; set; }
+        DbSet<Category> Categories { get; set; }
 
         int SaveChanges(bool acceptAllChangesOnSuccess);
         int SaveChanges();

@@ -1,0 +1,35 @@
+﻿@model RequestEditCategory
+<div class="card">
+    <div class="card-body">
+        <form asp-action="Edit" method="post">
+            <input type="hidden" asp-for="CategoryId" />
+            <div class="input-group input-group-sm mb-3">
+                <span class="input-group-text" id="categoryname">نام دسته بندی</span>
+                <input type="text" asp-for="CategoryName" class="form-control" aria-label="Sizing example input" aria-describedby="categoryname">
+            </div>
+            <div class="input-group mb-3">
+                <label class="input-group-text" for="parentcategory">دسته بندی والد</label>
+                <select class="form-select" id="parentcategory" asp-for="ParentCategory" asp-items="ViewBag.ParentCategories">
+                </select>
+            </div>
+            <button type="submit" class="btn btn-info px-5"><i class="bx bx-pencil mr-1"></i>ویرایش</button>
+        </form>
+    </div>
+</div>
+@section Scripts{
+    @if (ViewBag.Error != null)
+    {
+        <script>
+            Lobibox.notify('warning', {
+                pauseDelayOnHover: true,
+                size: 'mini',
+                rounded: true,
+                delayIndicator: false,
+                icon: 'bx bx-error',
+                continueDelayOnInactiveTab: false,
+                position: 'top left',
+                msg: '@ViewBag.Error'
+            });
+        </script>
+    }
+}
