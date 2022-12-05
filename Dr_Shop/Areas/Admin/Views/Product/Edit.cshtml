@@ -1,0 +1,222 @@
+﻿@model RequestEditProduct
+
+
+@section Css{
+    <link href="~/AdminAssets/plugins/input-tags/css/tagsinput.css" rel="stylesheet">
+    <link href="~/AdminAssets/plugins/sweetalert2/sweetalert2.min.css" rel="stylesheet" />
+    <link href="~/AdminAssets/plugins/drag-and-drop/dist/imageuploadify.min.css" rel="stylesheet" />
+}
+    <div class="card">
+        <div class="card-body">
+            <h6 class="mb-0 text-uppercase">ویرایش محصول</h6>
+            <hr>
+            <div class="form-body mt-4">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="border border-3 p-4 rounded">
+                            <div class="mb-3">
+                                <label for="inputProductTitle" class="form-label">عنوان محصول</label>
+                                <input asp-for="ProductName" type="text" class="form-control" id="inputProductTitle"
+                                   placeholder="عنوان محصول را وارد کنید">
+                            </div>
+                            <div class="mb-3">
+                                <label for="inputPrice" class="form-label">قیمت</label>
+                                <input asp-for="Price" type="number" class="form-control" id="inputPrice"
+                                   placeholder="200,000 تومان">
+                            </div>
+                            <div class="mb-2">
+                                <label for="inputProductType" class="form-label">دسته بندی</label>
+                                <select asp-for="CategoryId" class="form-select" id="inputProductType" asp-items="ViewBag.Categories">
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="inputShortProductDescription" class="form-label">توضیح کوتاه</label>
+                                <textarea asp-for="ShortDescription" class="form-control" id="inputShortProductDescription" rows="2" placeholder="لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم"></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="inputProductDescription" class="form-label">توضیحات</label>
+                                <textarea asp-for="Description" class="form-control" id="inputProductDescription" rows="4" placeholder="چند خط توضیح درمورد محصول بنویس D:"></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="image-uploadify" class="form-label">تصویر محصول</label>
+                                <input id="image-uploadify" type="file" accept=".xlsx,.xls,image/*,.doc,audio/*,.docx,video/*,.ppt,.pptx,.txt,.pdf" multiple="" style="display: none;">
+
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">برچسب های محصول</label>
+                                <div class="form-control bootstrap-tagsinput" id="producttags">
+
+                                    <input type="text" class="visually-hidden" data-role="tagsinput">
+
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="d-grid">
+                                    <button id="btnEditProduct" class="btn radius-30 btn-primary">ویرایش محصول</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="col-12">
+                            <div class="border border-3 p-4 rounded">
+                                <div class="input-group mb-3">
+                                    <button class="btn btn-outline-success" type="button"
+                                        id="button-addon1" onclick="AddFeature()">
+                                        افزودن
+                                    </button>
+                                    <input type="text" class="form-control" placeholder="ویژگی" id="txtfeature"
+                                       aria-label="Example text with button addon"
+                                       aria-describedby="button-addon1">
+                                    <input type="text" class="form-control" placeholder="مقدار" id="txtfeaturevalue"
+                                       aria-label="Example text with button addon"
+                                       aria-describedby="button-addon1">
+                                </div>
+                                <table class="table table-borderless mb-0 text-center" id="tblFeature">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">ویژگی</th>
+                                            <th scope="col">مقدار</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach (var fe in Model.Features)
+                                    {
+                                        <tr>
+                                            <th scope="row">@fe.Feature</th>
+                                            <td> @fe.Value </td>
+                                            <td><button type="button" class="btn btn-secondary" id="rmfeature"><i class="bx bx-trash-alt me-0"></i></button></td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--end row-->
+            <input type="hidden" id="inputProductId" asp-for="ProductId" />
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script src="~/AdminAssets/plugins/input-tags/js/tagsinput.js"></script>
+    <script src="~/AdminAssets/plugins/sweetalert2/sweetalert2.min.js"></script>
+    <script src="~/AdminAssets/plugins/drag-and-drop/dist/imageuploadify.min.js"></script>
+    <script>
+
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('#image-uploadify').imageuploadify();
+        })
+    </script>
+    <script>
+        function AddFeature() {
+            var feature = $("#txtfeature").val();
+            var featureval = $("#txtfeaturevalue").val();
+
+            if (feature == "" || featureval == "") {
+                swal.fire(
+                    'هشدار!',
+                    "نام و مقدار را باید وارد کنید",
+                    'warning'
+                );
+            }
+            else {
+                $('#tblFeature tbody').append(
+                    '<tr>' +
+                    '<th scope="row">' + feature + '</th>' +
+                    '<td>' + featureval + '</td>' +
+                    '<td><button type="button" class="btn btn-secondary" id="rmfeature"><i class="bx bx-trash-alt me-0"></i></button></td>' +
+                    '</tr>'
+                );
+                $("#txtfeature").val('');
+                $("#txtfeaturevalue").val('');
+            }
+        }
+        $("#tblFeature").on('click', '#rmfeature', function () {
+            $(this).closest('tr').remove();
+        });
+    </script>
+    <script>
+        $("#btnEditProduct").on("click", function () {
+            //Data For Post To Controller
+            var fdata = new FormData();
+            fdata.append("ProductId", $("#inputProductId").val());
+            fdata.append("ProductName", $("#inputProductTitle").val());
+            fdata.append("ShortDescription", $("#inputShortProductDescription").val());
+            fdata.append("Description", $("#inputProductDescription").val());
+            fdata.append("Price", $("#inputPrice").val());
+            fdata.append("CategoryId", $("#inputProductType").find('option:selected').val());
+
+            // Images
+            var productImages = document.getElementById("image-uploadify");
+
+            if (productImages.files.length > 0) {
+                for (var i = 0; i < productImages.files.length; i++) {
+                    fdata.append('Images', productImages.files[i]);
+                }
+            }
+            // Features
+            var dataFeaturesViewModel = $('#tblFeature tr:gt(0)').map(function () {
+                return {
+                    Feature: $(this.cells[0]).text(),
+                    Value: $(this.cells[1]).text(),
+                };
+            }).get();
+
+            $.each(dataFeaturesViewModel, function (i, val) {
+                fdata.append('Features[' + i + '].Feature', val.Feature);
+                fdata.append('Features[' + i + '].Value', val.Value);
+
+            });
+
+            // Tags
+            var productTags = $('#producttags span.badge').map(function () {
+                return {
+                    tag: $(this).text()
+                };
+            }).get();
+
+            $.each(productTags, function (i, val) {
+                fdata.append('Tags[' + i + ']', val.tag);
+            });
+
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("Edit","Product")',
+                contentType: false,
+                processData: false,
+                data: fdata,
+                success: function (data) {
+
+                    if (data.isSuccess == true) {
+                        swal.fire(
+                            'موفق!',
+                            data.message,
+                            'success'
+                        ).then(function (isConfirm) {
+                            window.location.href = "@Url.Action("index","Product")";
+
+                        });
+                    }
+                    else {
+
+                        swal.fire(
+                            'هشدار!',
+                            data.message,
+                            'warning'
+                        );
+                    }
+
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert(xhr.status);
+                    alert(thrownError);
+                }
+
+            });
+        })
+    </script>
+    }

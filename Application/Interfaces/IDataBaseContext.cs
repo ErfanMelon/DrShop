@@ -1,11 +1,6 @@
 ﻿using Domain.Entities.Account;
 using Domain.Entities.Product;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Interfaces
 {
@@ -13,6 +8,11 @@ namespace Application.Interfaces
     {
         DbSet<User> Users { get; set; }
         DbSet<Category> Categories { get; set; }
+        DbSet<Product> Products { get; set; }
+        DbSet<ProductImage> ProductImages { get; set; }
+        DbSet<ProductFeature> ProductFeatures { get; set; }
+        DbSet<ProductTag> ProductTags { get; set; }
+        DbSet<ProductToTag> ProductToTags { get; set; }
 
         int SaveChanges(bool acceptAllChangesOnSuccess);
         int SaveChanges();

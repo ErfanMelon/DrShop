@@ -14,6 +14,8 @@ namespace Persistance.Configurations
             builder.Property<DateTime?>("RemoveTime");
 
             builder.HasQueryFilter(e => !EF.Property<bool>(e, "IsRemoved"));
+
+            builder.HasMany(e => e.Products).WithOne(e => e.Category);
         }
     }
 }

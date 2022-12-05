@@ -1,0 +1,118 @@
+﻿@model PaginationDto<ProductListDto>
+
+<div class="row">
+	<div class="col-12">
+		<div class="card">
+			<div class="card-body">
+				<div class="row align-items-center">
+					<div class="col-lg-3 col-xl-2">
+						<a asp-action="Create" class="btn btn-primary mb-3 mb-lg-0">
+							<i class="bx bxs-plus-square"></i>محصول
+							جدید
+						</a>
+					</div>
+					<div class="col-lg-9 col-xl-10">
+						<form class="float-lg-end">
+							<div class="row row-cols-lg-2 row-cols-xl-auto g-2">
+								<div class="col">
+									<div class="position-relative">
+										<div class="input-group mb-3">
+											<form action="page.html">
+												<button class="btn btn-outline-primary" type="submit"
+														id="button-addon1">
+													<i class="bx bx-search"></i>
+												</button>
+												<input type="text" class="form-control"
+													   placeholder="جستجوی محصول ...."
+													   aria-label="Example text with button addon"
+													   aria-describedby="button-addon1">
+											</form>
+										</div>
+									</div>
+								</div>
+								<div class="col">
+									<div class="input-group">
+										<span class="input-group-text">
+											مرتب سازی
+											بر اساس
+										</span>
+										<select class="form-select"
+												aria-label="مثال ورودی انتخاب پیش فرض">
+											<option>بازدید</option>
+
+										</select>
+									</div>
+
+								</div>
+								<div class="col">
+									<div class="input-group">
+										<span class="input-group-text">
+											دسته
+											بندی
+										</span>
+										<select class="form-select"
+												aria-label="مثال ورودی انتخاب پیش فرض">
+											<option>بدون دسته بندی</option>
+
+										</select>
+									</div>
+								</div>
+
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-5 product-grid">
+	@foreach (var item in Model.Items)
+	{
+		<a asp-action="Detail" asp-route-id="@item.ProductId">
+			<div class="col">
+				<div class="card">
+					<img src="~/@item.Image" class="card-img-top" alt="...">
+					<div class="">
+					</div>
+					<div class="card-body">
+						<h6 class="card-title cursor-pointer"> @item.ProductName</h6>
+						<div class="clearfix">
+							<p class="mb-0 float-start"><strong>تعداد</strong> فروش</p>
+							<p class="mb-0 float-end fw-bold">
+								<span>@item.Price.ToString("n0") تومان</span>
+							</p>
+						</div>
+						<div class="d-flex align-items-center mt-3 fs-6">
+							<div class="cursor-pointer">
+								<i class="bx bxs-star text-warning"></i>
+								<i class="bx bxs-star text-warning"></i>
+								<i class="bx bxs-star text-warning"></i>
+								<i class="bx bxs-star text-warning"></i>
+								<i class="bx bxs-star text-secondary"></i>
+							</div>
+							<p class="mb-0 ms-auto">4.2(182)</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</a>
+	}
+</div>
+<paging total-records="Model.TotalCount"
+		page-no="Model.PageNumber"
+		page-size="Model.PageSize"
+		show-prev-next="true"
+		sr-text-first="ابتدا"
+		sr-text-last="انتها"
+		sr-text-next="بعدی"
+		sr-text-previous="قبلی"
+		show-total-pages="false"
+		show-total-records="false"
+		show-page-size-nav="false"
+		show-first-numbered-page="true"
+		show-last-numbered-page="true"
+		query-string-key-page-no="page"
+		query-string-key-page-size="pagesize"
+		gap-size="2">
+</paging>
