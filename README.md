@@ -1,2 +1,2 @@
 # DrShop
- WebStore For University Project
+ A simple online store made by asp.net core
