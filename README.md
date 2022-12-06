@@ -1,2 +1,2 @@
 # DrShop
- A simple online store made by asp.net core
+ A simple online store made with asp.net core
