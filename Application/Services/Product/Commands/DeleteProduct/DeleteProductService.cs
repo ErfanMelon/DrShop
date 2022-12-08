@@ -24,14 +24,14 @@ namespace Application.Services.Product.Commands.DeleteProduct
             var product = _context.Products
                 .Include(e => e.ProductFeatures)
                 .Include(e => e.ProductImages)
+                .Include(e => e.ProductTags)
                 .FirstOrDefault(e => e.ProductId == request.productId);
-            if (product != null)
-            {
-                _context.Products.Remove(product);
-                _context.SaveChangesAsync();
-                return Task.FromResult(new ResultDto { IsSuccess = true, Message = $"{product.Name} با موفقیت حذف شد" });
-            }
-            return Task.FromResult(new ResultDto { Message = "کالا پیدا نشد" });
+            if (product == null)
+                new ThrowThisException(new ArgumentNullException($"Product With Id {request.productId} not found"), "کالا پیدا نشد");
+
+            _context.Products.Remove(product);
+            _context.SaveChangesAsync();
+            return Task.FromResult(new ResultDto { IsSuccess = true, Message = $"{product.Name} با موفقیت حذف شد" });
         }
     }
     public record RequestDeleteProduct(int productId) : IRequest<ResultDto>;

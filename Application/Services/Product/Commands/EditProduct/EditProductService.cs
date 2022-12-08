@@ -27,38 +27,44 @@ namespace Application.Services.Product.Commands.EditProduct
             var product = _context.Products
                 .Include(e => e.ProductFeatures)
                 .Include(e => e.ProductImages)
-                .Include(e=>e.ProductTags)
+                .Include(e => e.ProductTags)
                 .FirstOrDefault(e => e.ProductId == request.ProductId);
-            if (product != null)
+            EditProductValidation validationRules = new EditProductValidation(_context);
+          var isvalid=  validationRules.Validate(request);
+            if (!isvalid.IsValid)
             {
-                string productname = product.Name;
-
-                if (product.ProductFeatures.Any())
-                    _context.ProductFeatures.RemoveRange(product.ProductFeatures);
-                if (product.ProductImages.Any())
-                    _context.ProductImages.RemoveRange(product.ProductImages);
-                if (product.ProductTags.Any())
-                    _context.ProductToTags.RemoveRange(product.ProductTags);
-
-                product.Name = request.ProductName;
-                product.ShortDescription = product.ShortDescription;
-                product.Description = product.Description;
-                product.Category = _context.Categories.Find(request.CategoryId);
-                product.Price = request.Price;
-                product.ProductFeatures = request.Features.Select(e => new Domain.Entities.Product.ProductFeature
-                {
-                    Feature = e.Feature,
-                    Value = e.Value
-                }).ToList();
-
-                product.ProductImages = await ImageUploader(request.Images);
-                await _mediator.Send(new RequestAttachTagsToProduct(request.Tags, product.ProductId));
-
-                await _context.SaveChangesAsync();
-
-                return new ResultDto { IsSuccess = true, Message = $"{productname} با موفقیت ویرایش شد" };
+                return new ResultDto { Message = isvalid.Errors[0].ErrorMessage };
             }
-            return new ResultDto { Message = "کالا پیدا نشد" };
+            if (product == null)
+                new ThrowThisException(new ArgumentNullException($"Product with id {request.ProductId} not found"), "کالا پیدا نشد");
+            string productname = product.Name;
+
+            if (product.ProductFeatures.Any())
+                _context.ProductFeatures.RemoveRange(product.ProductFeatures);
+            if (product.ProductImages.Any())
+                _context.ProductImages.RemoveRange(product.ProductImages);
+            if (product.ProductTags.Any())
+                _context.ProductToTags.RemoveRange(product.ProductTags);
+
+            product.Name = request.ProductName;
+            product.ShortDescription = product.ShortDescription;
+            product.Description = product.Description;
+            product.Category = _context.Categories.Find(request.CategoryId);
+            product.Price = request.Price;
+            product.ProductFeatures = request.Features.Select(e => new Domain.Entities.Product.ProductFeature
+            {
+                Feature = e.Feature,
+                Value = e.Value
+            }).ToList();
+
+            product.ProductImages = await ImageUploader(request.Images);
+            await _mediator.Send(new RequestAttachTagsToProduct(request.Tags, product.ProductId));
+
+            await _context.SaveChangesAsync();
+
+            return new ResultDto { IsSuccess = true, Message = $"{productname} با موفقیت ویرایش شد" };
+
+
         }
         private async Task<List<ProductImage>> ImageUploader(List<IFormFile> images)
         {
@@ -89,10 +95,10 @@ namespace Application.Services.Product.Commands.EditProduct
         public List<FeatureDto> Features { get; set; }
         public List<string> Tags { get; set; }
     }
-    public class AddProductValidation : AbstractValidator<RequestEditProduct>
+    public class EditProductValidation : AbstractValidator<RequestEditProduct>
     {
         private readonly IDataBaseContext _context;
-        public AddProductValidation(IDataBaseContext context)
+        public EditProductValidation(IDataBaseContext context)
         {
             _context = context;
 

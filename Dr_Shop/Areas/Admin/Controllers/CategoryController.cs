@@ -3,6 +3,7 @@ using Application.Services.Product.Commands.DeleteCategory;
 using Application.Services.Product.Commands.EditCategory;
 using Application.Services.Product.Queries.GetCategories;
 using Application.Services.Product.Queries.GetCategory;
+using Dr_Shop.Models.Filters;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -55,18 +56,14 @@ namespace Dr_Shop.Areas.Admin.Controllers
         public async Task<IActionResult> Edit(int id)
         {
             var result = await _mediator.Send(new RequestGetCategory(id));
-            if (result.IsSuccess)
+            ViewBag.ParentCategories = await _mediator.Send(new RequestGetParentCategories());
+            return View(new RequestEditCategory
             {
-                ViewBag.ParentCategories = await _mediator.Send(new RequestGetParentCategories());
-                return View(new RequestEditCategory
-                {
-                    CategoryId = result.Data.CategoryId,
-                    CategoryName = result.Data.CategoryName,
-                    ParentCategory = result.Data.ParentCategoryId
-                });
-            }
-            TempData["Error"] = result.Message;
-            return BadRequest();
+                CategoryId = result.Data.CategoryId,
+                CategoryName = result.Data.CategoryName,
+                ParentCategory = result.Data.ParentCategoryId
+            });
+
         }
         [HttpPost]
         public async Task<IActionResult> Edit(RequestEditCategory model)
@@ -81,12 +78,8 @@ namespace Dr_Shop.Areas.Admin.Controllers
                     CategoryName = model.CategoryName.Trim(),
                     ParentCategory = model.ParentCategory
                 });
-                if (result.IsSuccess)
-                {
-                    TempData["Success"] = result.Message;
-                    return RedirectToAction("Index");
-                }
-                ViewBag.Error = result.Message;
+                TempData["Success"] = result.Message;
+                return RedirectToAction("Index");
             }
             else
             {
@@ -96,19 +89,18 @@ namespace Dr_Shop.Areas.Admin.Controllers
             return View(model);
         }
         [HttpPost]
+        [TypeFilter(typeof(JsonExceptionFilter))]
         public async Task<IActionResult> Delete(int id)
         {
             var result = await _mediator.Send(new RequestDeleteCategory(id));
             return Json(result);
         }
+        [TypeFilter(typeof(JsonExceptionFilter))]
         public async Task<IActionResult> Detail(int id)
         {
             var result = await _mediator.Send(new RequestGetCategory(id));
-            if (result.IsSuccess)
-            {
-                return PartialView(result.Data);
-            }
-            return BadRequest();
+            return PartialView(result.Data);
+            return null;
         }
     }
 }

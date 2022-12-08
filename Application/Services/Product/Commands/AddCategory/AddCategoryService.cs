@@ -17,9 +17,8 @@ namespace Application.Services.Product.Commands.AddCategory
         {
             var parentCategory = _context.Categories.Find(request.parentCategoryId);
             if (parentCategory != null && parentCategory.ParentCategoryId != null)
-            {
-                return new ResultDto { Message = $"درحال حاضر افزودن دو دسته بندی تودرتو وجود ندارد" };
-            }
+                new ThrowThisException(new ArgumentOutOfRangeException($"CategoryTree set to one branch {parentCategory.CategoryName} cannot nest with {request.categoryName}"), "درحال حاضر افزودن دو دسته بندی تودرتو وجود ندارد");
+
             Category category = new Category
             {
                 CategoryName = request.categoryName,

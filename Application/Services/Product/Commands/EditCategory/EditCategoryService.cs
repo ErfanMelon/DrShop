@@ -18,15 +18,14 @@ namespace Application.Services.Product.Commands.EditCategory
             var category = _context.Categories
                 .Include(e => e.ParentCategory)
                 .FirstOrDefault(e => e.CategoryId == request.CategoryId);
-            if (category != null)
-            {
-                category.ParentCategory = _context.Categories.Find(request.ParentCategory);
-                string oldCategoryName = category.CategoryName;
-                category.CategoryName = request.CategoryName;
-                await _context.SaveChangesAsync();
-                return new ResultDto { IsSuccess = true, Message = $"{oldCategoryName} با موفقیت ویرایش شد" };
-            }
-            return new ResultDto { Message = "دسته بندی پیدا نشد" };
+            if (category == null)
+                new ThrowThisException(new ArgumentNullException($"Category with id {request.CategoryId} not found "), "دسته بندی پیدا نشد");
+            
+            category.ParentCategory = _context.Categories.Find(request.ParentCategory);
+            string oldCategoryName = category.CategoryName;
+            category.CategoryName = request.CategoryName;
+            await _context.SaveChangesAsync();
+            return new ResultDto { IsSuccess = true, Message = $"{oldCategoryName} با موفقیت ویرایش شد" };
         }
     }
 }

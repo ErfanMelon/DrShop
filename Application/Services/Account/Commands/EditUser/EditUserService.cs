@@ -14,16 +14,15 @@ namespace Application.Services.Account.Commands.EditUser
         public async Task<ResultDto> Handle(RequestEditUser request, CancellationToken cancellationToken)
         {
             var user = await _context.Users.FindAsync(request.UserId);
-            if (user != null)
-            {
+            if (user == null)
+                new ThrowThisException(new ArgumentNullException($"User with id {request.UserId} not Found"), "کاربر یافت نشد");
+
                 user.Username = request.Username;
                 user.Email = request.Email;
                 user.RoleId = (int)request.Role;
                 await _context.SaveChangesAsync();
 
                 return new ResultDto { Message = "اطلاعات ویرایش شد", IsSuccess = true };
-            }
-            return new ResultDto { Message = "کاربر پیدا نشد" };
         }
     }
 }

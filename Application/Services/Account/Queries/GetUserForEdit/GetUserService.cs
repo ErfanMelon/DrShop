@@ -15,21 +15,20 @@ namespace Application.Services.Account.Queries.GetUserForEdit
 
         public Task<ResultDto<UserDto>> Handle(RequestGetUser request, CancellationToken cancellationToken)
         {
-            var user =_context.Users
+            var user = _context.Users
                 .AsNoTracking()
-                .FirstOrDefault(e=>e.UserId==request.UserId);
-            if (user != null)
+                .FirstOrDefault(e => e.UserId == request.UserId);
+            if (user == null)
+                new ThrowThisException(new ArgumentNullException($"User with id {request.UserId} not Found"), "کاربر یافت نشد");
+
+            UserDto resultUser = new UserDto
             {
-                UserDto resultUser = new UserDto
-                {
-                    UserId = user.UserId,
-                    Email = user.Email,
-                    Role = (BaseRole)user.RoleId,
-                    Username = user.Username
-                };
-                return Task.FromResult(new ResultDto<UserDto> { Data = resultUser, IsSuccess = true });
-            }
-            return Task.FromResult(new ResultDto<UserDto> { Message = "کاربر پیدا نشد" });
+                UserId = user.UserId,
+                Email = user.Email,
+                Role = (BaseRole)user.RoleId,
+                Username = user.Username
+            };
+            return Task.FromResult(new ResultDto<UserDto> { Data = resultUser, IsSuccess = true });
         }
     }
 }

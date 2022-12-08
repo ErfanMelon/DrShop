@@ -4,6 +4,7 @@ using Application.Services.Account.Commands.RegisterUser;
 using Application.Services.Account.Queries.GetUserForEdit;
 using Application.Services.Account.Queries.GetUsers;
 using Common;
+using Dr_Shop.Models.Filters;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -21,21 +22,16 @@ namespace Dr_Shop.Areas.Admin.Controllers
             _mediator = mediator;
         }
 
-        public async Task<IActionResult> Index(string? Searchkey,int page = 1, int pagesize = 20)
+        public async Task<IActionResult> Index(string? Searchkey, int page = 1, int pagesize = 20)
         {
-            var result = await _mediator.Send(new RequestGetUsers(page, pagesize,Searchkey));
+            var result = await _mediator.Send(new RequestGetUsers(page, pagesize, Searchkey));
             return View(result.Data);
         }
         public async Task<IActionResult> Edit(int id)
         {
             var result = await _mediator.Send(new RequestGetUser(id));
-            if (result.IsSuccess)
-            {
-                GetRolesForSelectList();
-                return View(result.Data);
-            }
-            TempData["Error"] = result.Message;
-            return BadRequest();
+            GetRolesForSelectList();
+            return View(result.Data);
         }
         [HttpPost]
         public async Task<IActionResult> Edit(UserDto model)
@@ -52,11 +48,8 @@ namespace Dr_Shop.Areas.Admin.Controllers
                     UserId = model.UserId,
                     Username = model.Username.Trim(),
                 });
-                if (result.IsSuccess)
-                {
-                    TempData["Success"] = result.Message;
-                    return RedirectToAction("Index", "Users");
-                }
+                TempData["Success"] = result.Message;
+                return RedirectToAction("Index", "Users");
             }
             else
             {
@@ -67,6 +60,7 @@ namespace Dr_Shop.Areas.Admin.Controllers
             return View(model);
         }
         [HttpPost]
+        [TypeFilter(typeof(JsonExceptionFilter))]
         public async Task<IActionResult> Delete(int id)
         {
             var result = await _mediator.Send(new RequestDeleteUser(id));

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Dr_Shop.Models.Filters;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Dr_Shop.Controllers
 {

@@ -1,7 +1,7 @@
 ﻿using Application;
 using Application.Interfaces;
 using Common;
-using FluentValidation.AspNetCore;
+using Dr_Shop.Models.Filters;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
@@ -10,7 +10,10 @@ using Persistance.Context;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews(options =>
+{
+    options.Filters.Add(typeof(PageExceptionFilter),-1);
+});
 
 
 string connectionString = builder.Configuration["ConnectionString"];

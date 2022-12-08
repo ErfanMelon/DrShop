@@ -21,9 +21,8 @@ namespace Application.Services.Comon.UploadFile
         public Task<ResultDto<string>> Handle(RequestUploadFile request, CancellationToken cancellationToken)
         {
             if (request.file == null)
-            {
-                return Task.FromResult(new ResultDto<string> { Message = "فایل خالی است" });
-            }
+                new ThrowThisException(new ArgumentNullException($"File is corrupt"), "فایل خراب/خالی است");
+           
             string folder = @"ProductImages\";
             string path = Path.Combine(_environment.WebRootPath, folder);
             if (!Directory.Exists(path))

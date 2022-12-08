@@ -15,13 +15,13 @@ namespace Application.Services.Account.Commands.DeleteUser
         public async Task<ResultDto> Handle(RequestDeleteUser request, CancellationToken cancellationToken)
         {
             var user = await _context.Users.FindAsync(request.UserId);
-            if (user != null)
-            {
-                _context.Users.Remove(user);
-                await _context.SaveChangesAsync();
-                return new ResultDto { IsSuccess = true, Message = "کاربر حذف شد" };
-            }
-            return new ResultDto { Message = "کاربر پیدا نشد" };
+            if (user == null)
+                new ThrowThisException(new ArgumentNullException($"User with id {request.UserId} not Found"), "کاربر یافت نشد");
+
+            _context.Users.Remove(user);
+            await _context.SaveChangesAsync();
+            return new ResultDto { IsSuccess = true, Message = "کاربر حذف شد" };
+
         }
     }
 }

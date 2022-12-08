@@ -5,6 +5,7 @@ using Application.Services.Product.Queries.GetCategories;
 using Application.Services.Product.Queries.GetProduct;
 using Application.Services.Product.Queries.GetProducts;
 using Application.Services.Product.Queries.SearchProducts;
+using Dr_Shop.Models.Filters;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -26,9 +27,9 @@ namespace Dr_Shop.Areas.Admin.Controllers
         {
             _mediator = mediator;
         }
-        public async Task<IActionResult> Index(int page=1,int pagesize=20)
+        public async Task<IActionResult> Index(int page = 1, int pagesize = 20)
         {
-            var result = await _mediator.Send(new RequestGetProducts(page,pagesize));
+            var result = await _mediator.Send(new RequestGetProducts(page, pagesize));
             GetCategories();
             return View(result.Data);
         }
@@ -40,12 +41,7 @@ namespace Dr_Shop.Areas.Admin.Controllers
         public async Task<IActionResult> Detail(int id)
         {
             var result = await _mediator.Send(new RequestGetProduct(id));
-            if (result.IsSuccess)
-            {
-                return View(result.Data);
-            }
-            TempData["Error"] = result.Message;
-            return BadRequest();
+            return View(result.Data);
         }
         private void GetCategories()
         {
@@ -72,6 +68,7 @@ namespace Dr_Shop.Areas.Admin.Controllers
             return Json(result);
         }
         [HttpPost]
+        [TypeFilter(typeof(JsonExceptionFilter))]
         public async Task<IActionResult> Delete(int id)
         {
             var result = await _mediator.Send(new RequestDeleteProduct(id));
@@ -80,29 +77,25 @@ namespace Dr_Shop.Areas.Admin.Controllers
         public async Task<IActionResult> Edit(int id)
         {
             var result = await _mediator.Send(new RequestGetProductForEdit(id));
-            if (result.IsSuccess)
-            {
-                GetCategories();
-                return View(result.Data);
-            }
-            ViewBag.Error = result.Message;
-            return BadRequest();
+            GetCategories();
+            return View(result.Data);
         }
         [HttpPost]
+        [TypeFilter(typeof(JsonExceptionFilter))]
         public async Task<IActionResult> Edit(RequestEditProduct model)
         {
             var result = await _mediator.Send(model);
             return Json(result);
         }
-        public async Task<IActionResult> Search(int page=1,int pagesize=20,int categoryid=0,SortBy order=SortBy.News,string searchkey="")
+        public async Task<IActionResult> Search(int page = 1, int pagesize = 20, int categoryid = 0, SortBy order = SortBy.News, string searchkey = "")
         {
             var result = await _mediator.Send(new RequestSearchProduct
             {
-                Page=page,
-                PageSize=pagesize,
-                CategoryId=categoryid,
-                Order=order,
-                SearchKey=searchkey
+                Page = page,
+                PageSize = pagesize,
+                CategoryId = categoryid,
+                Order = order,
+                SearchKey = searchkey
             });
             GetCategories();
             return View(result.Data);

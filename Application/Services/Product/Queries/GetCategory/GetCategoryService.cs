@@ -21,8 +21,8 @@ namespace Application.Services.Product.Queries.GetCategory
                 .Include(e => e.ParentCategory)
                 .Include(e => e.SubCategories)
                 .FirstOrDefault(e => e.CategoryId == request.categoryId);
-            if (category != null)
-            {
+            if (category == null)
+                new ThrowThisException(new ArgumentNullException($"Category with id {request.categoryId} not found"), "دسته بندی پیدا نشد");
                 CategoryDto categoryDto = new CategoryDto
                 {
                     CategoryId = category.CategoryId,
@@ -32,8 +32,7 @@ namespace Application.Services.Product.Queries.GetCategory
                     SubCategories = category.SubCategories != null ? category.SubCategories.Select(c => c.CategoryName).ToList() : new List<string>(),
                 };
                 return Task.FromResult(new ResultDto<CategoryDto> { Data = categoryDto, IsSuccess = true });
-            }
-            return Task.FromResult(new ResultDto<CategoryDto> { Message = "دسته بندی پیدا نشد" });
+            
         }
     }
 }

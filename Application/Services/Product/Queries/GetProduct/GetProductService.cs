@@ -24,9 +24,10 @@ namespace Application.Services.Product.Queries.GetProduct
 				.ThenInclude(e=>e.Tag)
 				.AsNoTracking()
 				.FirstOrDefault(e => e.ProductId == request.productId);
-			if (product!=null)
-			{
-				ProductDetailDto productDetail = new ProductDetailDto
+            if (product == null)
+                new ThrowThisException(new ArgumentNullException($"Product With Id {request.productId} not found"), "کالا پیدا نشد");
+
+            ProductDetailDto productDetail = new ProductDetailDto
 				{
 					AllFeatures = product.ProductFeatures.Select(e => new FeatureDto { Feature = e.Feature, Value = e.Value }).ToList(),
 					TopFeatures = product.ProductFeatures.Take(3).Select(e => new FeatureDto { Feature = e.Feature, Value = e.Value }).ToList(),
@@ -46,8 +47,7 @@ namespace Application.Services.Product.Queries.GetProduct
 					IsSuccess=true,
 					Data=productDetail
 				});
-			}
-			return Task.FromResult(new ResultDto<ProductDetailDto> {Message = "کالا پیدا نشد" });
+			
 		}
 	}
 	public class ProductDetailDto

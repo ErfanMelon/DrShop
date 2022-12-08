@@ -30,9 +30,10 @@ namespace Application.Services.Product.Queries.GetProduct
                 .Include(e => e.ProductTags)
                 .ThenInclude(e => e.Tag)
                 .FirstOrDefault(e => e.ProductId == request.productID);
-            if (product != null)
-            {
-                RequestEditProduct productDetail = new RequestEditProduct
+            if (product == null)
+                new ThrowThisException(new ArgumentNullException($"product with id {request.productID} not found"), "محصول پیدا نشد");
+
+            RequestEditProduct productDetail = new RequestEditProduct
                 {
                     CategoryId = product.Category.CategoryId,
                     Description = product.Description,
@@ -52,11 +53,8 @@ namespace Application.Services.Product.Queries.GetProduct
                     Data = productDetail,
                     IsSuccess = true
                 });
-            }
-            return Task.FromResult(new ResultDto<RequestEditProduct>
-            {
-                Message = "محصول پیدا نشد"
-            });
+            
+            
         }
     }
     public record RequestGetProductForEdit(int productID) : IRequest<ResultDto<RequestEditProduct>>;
