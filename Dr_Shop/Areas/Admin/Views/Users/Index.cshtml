@@ -4,6 +4,13 @@
 }
     <h6 class="mb-0 text-uppercase">لیست کاربران ثبت نام شده در سایت</h6>
     <hr />
+    <form asp-action="Index">
+        <div class="input-group mb-3">
+            <button class="btn btn-outline-success" type="submit" id="button-addon1">جستجو</button>
+            <input type="text" class="form-control" name="Searchkey" placeholder="جستجو نام ، ایمیل" aria-label="Example text with button addon" aria-describedby="button-addon1">
+        </div>
+    </form>
+    
     <div class="card">
         <div class="card-body">
             <table class="table mb-0">
@@ -48,6 +55,7 @@
                 show-last-numbered-page="true"
                 query-string-key-page-no="page"
                 query-string-key-page-size="pagesize"
+                query-string-value="@@(Request.QueryString.Value)"
                 gap-size="2">
         </paging>
     </div>

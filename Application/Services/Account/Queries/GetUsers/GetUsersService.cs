@@ -16,6 +16,14 @@ namespace Application.Services.Account.Queries.GetUsers
         public Task<ResultDto<PaginationDto<GetUserDto>>> Handle(RequestGetUsers request, CancellationToken cancellationToken)
         {
             var Users = _context.Users.AsNoTracking().AsQueryable();
+            if (!string.IsNullOrWhiteSpace(request.SearchKey))
+            {
+                string searchKey = request.SearchKey.Trim();
+                Users = Users.Where(e =>
+                e.Email.Contains(searchKey) ||
+                e.Username.Contains(searchKey)
+                );
+            }
             var result = Users
                 .ToPaged(request.page, request.pagesize, out int rowsCount)
                 .Select(u => new GetUserDto
