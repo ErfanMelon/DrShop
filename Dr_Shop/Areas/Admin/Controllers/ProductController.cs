@@ -4,6 +4,7 @@ using Application.Services.Product.Commands.EditProduct;
 using Application.Services.Product.Queries.GetCategories;
 using Application.Services.Product.Queries.GetProduct;
 using Application.Services.Product.Queries.GetProducts;
+using Application.Services.Product.Queries.SearchProducts;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -25,10 +26,10 @@ namespace Dr_Shop.Areas.Admin.Controllers
         {
             _mediator = mediator;
         }
-
-        public async Task<IActionResult> Index(int page = 1, int pagesize = 20)
+        public async Task<IActionResult> Index(int page=1,int pagesize=20)
         {
-            var result = await _mediator.Send(new RequestGetProducts(page, pagesize));
+            var result = await _mediator.Send(new RequestGetProducts(page,pagesize));
+            GetCategories();
             return View(result.Data);
         }
         public IActionResult Create()
@@ -92,6 +93,19 @@ namespace Dr_Shop.Areas.Admin.Controllers
         {
             var result = await _mediator.Send(model);
             return Json(result);
+        }
+        public async Task<IActionResult> Search(int page=1,int pagesize=20,int categoryid=0,SortBy order=SortBy.News,string searchkey="")
+        {
+            var result = await _mediator.Send(new RequestSearchProduct
+            {
+                Page=page,
+                PageSize=pagesize,
+                CategoryId=categoryid,
+                Order=order,
+                SearchKey=searchkey
+            });
+            GetCategories();
+            return View(result.Data);
         }
     }
 }

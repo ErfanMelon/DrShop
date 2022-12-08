@@ -39,6 +39,7 @@ namespace Application.Services.Product.Commands.AddProduct
                     Feature = e.Feature,
                     Value = e.Value
                 }).ToList(),
+                Visits=0,
             };
             _context.Products.Add(newProduct);
 

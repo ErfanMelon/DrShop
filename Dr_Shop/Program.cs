@@ -1,6 +1,7 @@
 ﻿using Application;
 using Application.Interfaces;
 using Common;
+using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+
 string connectionString = builder.Configuration["ConnectionString"];
 builder.Services.AddDbContext<DataBaseContext>(options =>
 {

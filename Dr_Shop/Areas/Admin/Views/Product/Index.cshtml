@@ -12,21 +12,19 @@
 						</a>
 					</div>
 					<div class="col-lg-9 col-xl-10">
-						<form class="float-lg-end">
+						<form class="float-lg-end" asp-action="Search" method="get">
 							<div class="row row-cols-lg-2 row-cols-xl-auto g-2">
 								<div class="col">
 									<div class="position-relative">
 										<div class="input-group mb-3">
-											<form action="page.html">
 												<button class="btn btn-outline-primary" type="submit"
 														id="button-addon1">
 													<i class="bx bx-search"></i>
 												</button>
-												<input type="text" class="form-control"
+											<input type="text" class="form-control" name="searchkey"
 													   placeholder="جستجوی محصول ...."
 													   aria-label="Example text with button addon"
 													   aria-describedby="button-addon1">
-											</form>
 										</div>
 									</div>
 								</div>
@@ -36,13 +34,10 @@
 											مرتب سازی
 											بر اساس
 										</span>
-										<select class="form-select"
+										<select class="form-select" asp-items="Html.GetEnumSelectList<SortBy>()" name="order"
 												aria-label="مثال ورودی انتخاب پیش فرض">
-											<option>بازدید</option>
-
 										</select>
 									</div>
-
 								</div>
 								<div class="col">
 									<div class="input-group">
@@ -50,10 +45,9 @@
 											دسته
 											بندی
 										</span>
-										<select class="form-select"
+										<select class="form-select" asp-items="ViewBag.Categories" name="categoryid"
 												aria-label="مثال ورودی انتخاب پیش فرض">
-											<option>بدون دسته بندی</option>
-
+											<option value="0">همه دسته ها</option>
 										</select>
 									</div>
 								</div>

@@ -80,30 +80,34 @@ namespace Dr_Shop.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(RequestRegisterUser model)
         {
-            ResultDto<int> result;
-            RegisterUserValidation validationRules = new RegisterUserValidation();
-            var validation = validationRules.Validate(model);
-            if (validation.IsValid)
+            if (ModelState.IsValid)
             {
-                result = await _mediator.Send(new RequestRegisterUser
+                ResultDto<int> result;
+                RegisterUserValidation validationRules = new RegisterUserValidation();
+                var validation = validationRules.Validate(model);
+                if (validation.IsValid)
                 {
-                    Email = model.Email.Trim(),
-                    Role = model.Role,
-                    Username = model.Username.Trim(),
-                    Password=model.Password,
-                });
-                if (result.IsSuccess)
-                {
-                    TempData["Success"] = result.Message;
-                    return RedirectToAction("Index", "Users");
+                    result = await _mediator.Send(new RequestRegisterUser
+                    {
+                        Email = model.Email.Trim(),
+                        Role = model.Role,
+                        Username = model.Username.Trim(),
+                        Password = model.Password,
+                    });
+                    if (result.IsSuccess)
+                    {
+                        TempData["Success"] = result.Message;
+                        return RedirectToAction("Index", "Users");
+                    }
                 }
+                else
+                {
+                    result = new ResultDto<int> { Message = validation.Errors[0].ErrorMessage };
+                }
+                GetRolesForSelectList();
+                ViewBag.Error = result.Message;
+                return View(model);
             }
-            else
-            {
-                result = new ResultDto<int> { Message = validation.Errors[0].ErrorMessage };
-            }
-            GetRolesForSelectList();
-            ViewBag.Error = result.Message;
             return View(model);
         }
         /// <summary>
