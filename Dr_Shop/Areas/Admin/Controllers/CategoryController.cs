@@ -16,9 +16,9 @@ namespace Dr_Shop.Areas.Admin.Controllers
         {
             _mediator = mediator;
         }
-        public async Task<IActionResult> Index(int page = 1, int pagesize = 30)
+        public async Task<IActionResult> Index(string? Searchkey, int page = 1, int pagesize = 30)
         {
-            var result = await _mediator.Send(new RequestGetCategories(page, pagesize));
+            var result = await _mediator.Send(new RequestGetCategories(page, pagesize, Searchkey));
             return View(result.Data);
         }
         public async Task<IActionResult> Create()
