@@ -6,13 +6,16 @@ using Application.Services.Account.Queries.GetUsers;
 using Common;
 using Dr_Shop.Models.Filters;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Data;
 using static Application.Services.Account.Commands.RegisterUser.RegisterUserService;
 
 namespace Dr_Shop.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class UsersController : Controller
     {
         private readonly IMediator _mediator;

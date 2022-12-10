@@ -5,11 +5,14 @@ using Application.Services.Product.Queries.GetCategories;
 using Application.Services.Product.Queries.GetCategory;
 using Dr_Shop.Models.Filters;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Data;
 
 namespace Dr_Shop.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class CategoryController : Controller
     {
         private readonly IMediator _mediator;

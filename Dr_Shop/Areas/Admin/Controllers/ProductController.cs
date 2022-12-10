@@ -7,6 +7,7 @@ using Application.Services.Product.Queries.GetProducts;
 using Application.Services.Product.Queries.SearchProducts;
 using Dr_Shop.Models.Filters;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
@@ -19,6 +20,7 @@ using System.Threading.Tasks;
 namespace Dr_Shop.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class ProductController : Controller
     {
         private readonly IMediator _mediator;
