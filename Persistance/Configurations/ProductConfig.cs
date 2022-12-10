@@ -20,6 +20,8 @@ namespace Persistance.Configurations
             builder.HasMany(e => e.ProductImages).WithOne().IsRequired(true);
             builder.HasMany(e => e.ProductFeatures).WithOne().IsRequired(true);
             builder.HasMany(e => e.ProductTags).WithOne(e => e.Product).OnDelete(DeleteBehavior.Cascade);
+
+            builder.HasIndex(e => e.Slug).IsUnique(true);
         }
     }
 }

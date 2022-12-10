@@ -56,6 +56,7 @@ namespace Application.Services.Product.Commands.EditProduct
                 Feature = e.Feature,
                 Value = e.Value
             }).ToList();
+            product.Slug = request.ProductSlug;
 
             product.ProductImages = await ImageUploader(request.Images);
             await _mediator.Send(new RequestAttachTagsToProduct(request.Tags, product.ProductId));
@@ -94,6 +95,7 @@ namespace Application.Services.Product.Commands.EditProduct
         public List<IFormFile> Images { get; set; }
         public List<FeatureDto> Features { get; set; }
         public List<string> Tags { get; set; }
+        public string ProductSlug { get; set; }
     }
     public class EditProductValidation : AbstractValidator<RequestEditProduct>
     {
@@ -112,10 +114,14 @@ namespace Application.Services.Product.Commands.EditProduct
             RuleFor(e => e.Features).NotEmpty().WithMessage("ویژگی محصول را وارد کنید");
             RuleForEach(e => e.Features).SetValidator(new ProductFeatureDtoValidation());
             RuleForEach(e => e.Tags).NotEmpty().WithMessage("تگ را درست وارد کنید").When(e => e.Tags != null);
+            RuleFor(e => e.ProductSlug).NotEmpty().WithMessage("اسلاگ محصول را وارد کنید").Matches("^[a-z\\d](?:[a-z\\d_-]*[a-z\\d])?$").WithMessage("اسلاگ را به درستی وارد کنید").Must(UniqueSlug).WithMessage("اسلاگ از قبل موجود است");
 
         }
 
-
+        private bool UniqueSlug(string arg)
+        {
+            return !_context.Products.Any(e => e.Slug == arg);
+        }
         private bool ValidCategory(int arg)
         {
             return _context.Categories.Any(e => e.CategoryId == arg);

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "OCEGFphiU4Hhn9Kx5OZzRB3tnBGei4qJOv1oidBFqug=",
+  "Hash": "GHCIDl3J/saqyT0sqncHLtU/vs4F4kOCssnENx9nbFw=",
   "Source": "Dr_Shop",
   "BasePath": "_content/Dr_Shop",
   "Mode": "Default",
@@ -13734,6 +13734,57 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
+    },
+    {
+      "Identity": "D:\\Documents\\Visual Studio 2022\\Projects\\DrShop\\Dr_Shop\\wwwroot\\ProductImages\\f92df80f-8442-4663-8f84-7e776aea8f4611.png",
+      "SourceId": "Dr_Shop",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Documents\\Visual Studio 2022\\Projects\\DrShop\\Dr_Shop\\wwwroot\\",
+      "BasePath": "_content/Dr_Shop",
+      "RelativePath": "ProductImages/f92df80f-8442-4663-8f84-7e776aea8f4611.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\ProductImages\\f92df80f-8442-4663-8f84-7e776aea8f4611.png"
+    },
+    {
+      "Identity": "D:\\Documents\\Visual Studio 2022\\Projects\\DrShop\\Dr_Shop\\wwwroot\\ProductPage\\script.js",
+      "SourceId": "Dr_Shop",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Documents\\Visual Studio 2022\\Projects\\DrShop\\Dr_Shop\\wwwroot\\",
+      "BasePath": "_content/Dr_Shop",
+      "RelativePath": "ProductPage/script.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\ProductPage\\script.js"
+    },
+    {
+      "Identity": "D:\\Documents\\Visual Studio 2022\\Projects\\DrShop\\Dr_Shop\\wwwroot\\ProductPage\\style.css",
+      "SourceId": "Dr_Shop",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Documents\\Visual Studio 2022\\Projects\\DrShop\\Dr_Shop\\wwwroot\\",
+      "BasePath": "_content/Dr_Shop",
+      "RelativePath": "ProductPage/style.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\ProductPage\\style.css"
     }
   ]
 }

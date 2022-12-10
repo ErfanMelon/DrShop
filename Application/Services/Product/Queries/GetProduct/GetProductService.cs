@@ -40,7 +40,8 @@ namespace Application.Services.Product.Queries.GetProduct
 					MainImage = product.ProductImages?.FirstOrDefault()?.Src ?? "",
 					Tags = product.ProductTags.Select(e=>e.Tag.Tag).ToList(),
 					Inventory = 0, // Not Implemented Yet
-					Stars= 5 // Not Implemented Yet
+					Stars= 5, // Not Implemented Yet
+					Slug=product.Slug
                 };
 				return Task.FromResult(new ResultDto<ProductDetailDto>
 				{
@@ -64,6 +65,7 @@ namespace Application.Services.Product.Queries.GetProduct
 		public List<string> Tags { get; set; }
 		public int Inventory { get; set; }
 		public int Stars { get; set; }
+		public string Slug { get; set; }
 	}
 	public record RequestGetProduct(int productId):IRequest<ResultDto<ProductDetailDto>>;
 }

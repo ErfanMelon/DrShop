@@ -112,6 +112,9 @@ namespace Persistance.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("InsertTime")
+                        .HasColumnType("datetime2");
+
                     b.Property<bool>("IsRemoved")
                         .HasColumnType("bit");
 
@@ -122,10 +125,6 @@ namespace Persistance.Migrations
                     b.Property<int>("Price")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("ProductCreate")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("InsertTime");
-
                     b.Property<DateTime?>("RemoveTime")
                         .HasColumnType("datetime2");
 
@@ -133,17 +132,22 @@ namespace Persistance.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Slug")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<DateTime?>("UpdateTime")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("Visits")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasDefaultValue(0);
+                        .HasColumnType("int");
 
                     b.HasKey("ProductId");
 
                     b.HasIndex("CategoryId");
+
+                    b.HasIndex("Slug")
+                        .IsUnique();
 
                     b.ToTable("Products");
                 });

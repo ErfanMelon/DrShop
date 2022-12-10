@@ -1,0 +1,74 @@
+﻿@model ResultGetProduct
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>محصول @Model.ProductName</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="~/productpage/style.css" rel="stylesheet" />
+</head>
+
+<body>
+    <main class="container">
+
+        <!-- Left Column / Headphones Image -->
+        <div class="left-column">
+            <img data-image="red" class="active" src="~/@Model.Image" alt="">
+        </div>
+
+
+        <!-- Right Column -->
+        <div class="right-column">
+
+            <!-- Product Description -->
+            <div class="product-description">
+                <span>@Model.Category</span>
+                <h1>@Model.ProductName</h1>
+                <p>
+                    @Model.Description
+                </p>
+            </div>
+
+           @* <!-- Product Configuration -->
+            <div class="product-configuration">
+
+                <!-- Product Color -->
+                <div class="product-color">
+                    <span>رنگ</span>
+
+                    <div class="color-choose">
+                        <div>
+                            <input data-image="red" type="radio" id="red" name="color" value="red" checked>
+                            <label for="red"><span></span></label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cable Configuration -->
+                <div class="cable-config">
+                    <span>سرعت شارژر</span>
+
+                    <div class="cable-choose">
+                        <button>10 وات</button>
+                        <button>15 وات</button>
+                        <button>20 وات</button>
+                    </div>
+
+                    <a href="#">چگونه لپ تاپ خود را پیکربندی کنیم</a>
+                </div>
+            </div>*@
+
+            <!-- Product Pricing -->
+            <div class="product-price">
+                <span>@Model.Price.ToString("n0") تومان</span>
+                <a href="#" class="cart-btn">افزودن به سبد خرید</a>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>

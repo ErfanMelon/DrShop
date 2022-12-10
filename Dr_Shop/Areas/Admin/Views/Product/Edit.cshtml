@@ -50,6 +50,11 @@
 
                                 </div>
                             </div>
+                            <div class="mb-3">
+                                <label for="inputProductSlug" class="form-label">اسلاگ</label>
+                                <input asp-for="ProductSlug" type="text" class="form-control" id="inputProductSlug"
+                                   placeholder="اسلاگ محصول را وارد کنید">
+                            </div>
                             <div class="col-12">
                                 <div class="d-grid">
                                     <button id="btnEditProduct" class="btn radius-30 btn-primary">ویرایش محصول</button>
@@ -149,6 +154,7 @@
             fdata.append("Description", $("#inputProductDescription").val());
             fdata.append("Price", $("#inputPrice").val());
             fdata.append("CategoryId", $("#inputProductType").find('option:selected').val());
+            fdata.append("ProductSlug", $("#inputProductSlug").val());
 
             // Images
             var productImages = document.getElementById("image-uploadify");

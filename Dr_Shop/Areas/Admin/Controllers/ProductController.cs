@@ -62,6 +62,7 @@ namespace Dr_Shop.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [TypeFilter(typeof(JsonExceptionFilter))]
         public async Task<IActionResult> Create(RequestAddProduct model)
         {
             var result = await _mediator.Send(model);
