@@ -123,20 +123,26 @@
 				}
 			</div>
 			<div class="tab-pane fade" id="primarycontact" role="tabpanel">
-				<div class="card radius-10">
+				<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleLargeModal">افزودن نظر</button>
+				@foreach (var item in Model.Comments)
+				{
+					<div class="card radius-10">
 					<div class="card-body">
 						<div class="d-flex align-items-center">
 							<img src="~/AdminAssets/images/avatars/guest.png" class="rounded-circle p-1 border" width="90" height="90" alt="...">
 							<div class="flex-grow-1 ms-3">
-								<h5 class="mt-0">کاربر</h5>
-								<p class="mb-0">نظرکاربر</p>
+								<h5 class="mt-0">@item.Username</h5>
+								<p class="mb-0">@item.Comment</p>
 								<hr>
 								<div class="row">
 									<div class="col-6">
 										<div class="card bg-success">
 											<div class="card-body">
 												<ul class="list-group list-group-flush">
-													<li class="list-group-item bg-transparent text-white"><i class="bx bx-like font-18 align-middle me-1"></i> لورم ایپسوم ساختگی</li>
+													@foreach (var advantage in item.Adv)
+												   {
+															<li class="list-group-item bg-transparent text-white"><i class="bx bx-like font-18 align-middle me-1"></i>@advantage</li>
+														}
 												</ul>
 											</div>
 										</div>
@@ -145,35 +151,41 @@
 										<div class="card bg-warning">
 											<div class="card-body">
 												<ul class="list-group list-group-flush">
-													<li class="list-group-item bg-transparent text-black"><i class="bx bx-dislike font-18 align-middle me-1"></i> لورم ایپسوم ساختگی</li>
+@foreach (var disadvantage in item.DisAdv)
+{
+														<li class="list-group-item bg-transparent text-black"><i class="bx bx-dislike font-18 align-middle me-1"></i>@disadvantage</li>
+}
 												</ul>
 											</div>
 										</div>
 									</div>
 									<div class="btn-group" role="group" aria-label="Basic example">
-										<button type="button" class="btn btn-danger">
+										<button type="button" class="btn btn-danger" onclick="DeleteComment('@item.CommentId')">
 											<i class="bx bx-trash me-0"></i>
 										</button>
-										<button type="button" class="btn btn-info">
+										<a class="btn btn-info">
 											<i class="bx bx-detail me-0"></i>
-										</button>
+										</a>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
+				}
 			</div>
 		</div>
 	</div>
-
 </div>
+<partial name="AddComment" model="@Model.ProductId"></partial>
 @section Css{
 	<link href="~/AdminAssets/plugins/sweetalert2/sweetalert2.min.css" rel="stylesheet" />
+		<link href="~/AdminAssets/plugins/input-tags/css/tagsinput.css" rel="stylesheet">
 
 }
 @section Scripts{
 	    <script src="~/AdminAssets/plugins/sweetalert2/sweetalert2.min.js"></script>
+	<script src="~/AdminAssets/plugins/input-tags/js/tagsinput.js"></script>
 
 	<script>
         function DeleteUser(id) {
@@ -223,6 +235,120 @@
                     Swal.fire(
                         'لغو شد',
                         'شما حذف محصول را لغو کردید :)',
+                        'error'
+                    )
+                }
+            })
+        }
+    </script>
+	<script>
+    $("#btnAddComment").on("click", function () {
+        var mycomment = new FormData();
+        mycomment.append("Comment", $("#inputcomment").val());
+        mycomment.append("Point", $("#productpoint").val());
+        mycomment.append("ProductId", @Model.ProductId);
+
+        var productadvantage = $('#adv span.badge').map(function () {
+            return {
+                tag: $(this).text()
+            };
+        }).get();
+        $.each(productadvantage, function (i, val) {
+            mycomment.append('Adv[' + i + ']', val.tag);
+        });
+
+        var productdisadvantage = $('#disadv span.badge').map(function () {
+            return {
+                tag: $(this).text()
+            };
+        }).get();
+        $.each(productdisadvantage, function (i, val) {
+            mycomment.append('DisAdv[' + i + ']', val.tag);
+        });
+
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("AddComment","Product")',
+            contentType: false,
+            processData: false,
+            data: mycomment,
+            success: function (data) {
+
+                if (data.isSuccess == true) {
+                    swal.fire(
+                        'موفق!',
+                        data.message,
+                        'success'
+                    ).then(function (isConfirm) {
+                        location.reload();
+                    });
+                }
+                else {
+
+                    swal.fire(
+                        'هشدار!',
+                        data.message,
+                        'warning'
+                    );
+                }
+
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert(xhr.status);
+                alert(thrownError);
+            }
+
+        });
+    })
+</script>
+	<script>
+        function DeleteComment(id) {
+            Swal.fire({
+                title: 'آیا مطمئن هستید؟',
+                text: "بعد از حذف شما قادر به بازگردانی نظر نخواهید بود",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonClass: 'me-2',
+                confirmButtonText: 'بله، حذف شود!',
+                cancelButtonText: 'نه، لغو شود',
+                reverseButtons: true
+            }).then((result) => {
+                if (result.value) {
+                    var postData={
+                        'id':id,
+                    };
+                    $.ajax({
+                        contentType: 'application/x-www-form-urlencoded',
+                        dataType: 'json',
+                        type: "POST",
+                        url: '@Url.Action("DeleteComment","Product")',
+                        data: postData,
+                        success: function (data) {
+                            if (data.isSuccess == true) {
+                                Swal.fire(
+                                    'موفق!',
+                                    data.message,
+                                    'success'
+                                ).then(function (isConfirm) {
+									location.reload();
+                                });
+                            }
+                            else {
+                                Swal.fire(
+                                    'هشدار!',
+                                    data.message,
+                                    'warning'
+                                );
+                            }
+                        }
+                    });
+                } else if (
+                    // Read more about handling dismissals
+                    result.dismiss === Swal.DismissReason.cancel
+                ) {
+                    Swal.fire(
+                        'لغو شد',
+                        'شما حذف نظر را لغو کردید :)',
                         'error'
                     )
                 }

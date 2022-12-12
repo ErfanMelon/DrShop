@@ -15,7 +15,7 @@ using static Application.Services.Account.Commands.RegisterUser.RegisterUserServ
 namespace Dr_Shop.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "Admin")]
+  //  [Authorize(Roles = "Admin")]
     public class UsersController : Controller
     {
         private readonly IMediator _mediator;

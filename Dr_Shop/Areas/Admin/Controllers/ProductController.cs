@@ -1,4 +1,6 @@
-﻿using Application.Services.Product.Commands.AddProduct;
+﻿using Application.Services.Product.Commands.AddComment;
+using Application.Services.Product.Commands.AddProduct;
+using Application.Services.Product.Commands.DeleteComment;
 using Application.Services.Product.Commands.DeleteProduct;
 using Application.Services.Product.Commands.EditProduct;
 using Application.Services.Product.Queries.GetCategories;
@@ -6,6 +8,7 @@ using Application.Services.Product.Queries.GetProduct;
 using Application.Services.Product.Queries.GetProducts;
 using Application.Services.Product.Queries.SearchProducts;
 using Dr_Shop.Models.Filters;
+using Dr_Shop.Utilities;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -20,7 +23,7 @@ using System.Threading.Tasks;
 namespace Dr_Shop.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     public class ProductController : Controller
     {
         private readonly IMediator _mediator;
@@ -102,6 +105,25 @@ namespace Dr_Shop.Areas.Admin.Controllers
             });
             GetCategories();
             return View(result.Data);
+        }
+        public IActionResult AddComment()
+        {
+            return PartialView();
+        }
+        [HttpPost]
+        [TypeFilter(typeof(JsonExceptionFilter))]
+        public async Task<IActionResult> AddComment(RequestAddComment model)
+        {
+            model.UserId = (int)ClaimUtility.GetUserId(User).Value;
+            var result = await _mediator.Send(model);
+            return Json(result);
+        }
+        [HttpPost]
+        [TypeFilter(typeof(JsonExceptionFilter))]
+        public async Task<IActionResult> DeleteComment(int id)
+        {
+            var result = await _mediator.Send(new RequestDeleteComment(id));
+            return Json(result);
         }
     }
 }

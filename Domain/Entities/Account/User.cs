@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Domain.Entities.Product;
+using System.ComponentModel.DataAnnotations;
 
 namespace Domain.Entities.Account
 {
@@ -12,5 +13,6 @@ namespace Domain.Entities.Account
         [DataType(DataType.Password)]
         public string Password { get; set; }
         public int RoleId { get; set; }
+        public ICollection<Comment> Comments { get; set; }
     }
 }

@@ -5,25 +5,25 @@
 namespace Persistance.Migrations
 {
     /// <inheritdoc />
-    public partial class updateproduct : Migration
+    public partial class fixcomment : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<int>(
-                name: "Visits",
-                table: "Products",
-                type: "int",
+            migrationBuilder.AddColumn<string>(
+                name: "CommentBody",
+                table: "Comments",
+                type: "nvarchar(max)",
                 nullable: false,
-                defaultValue: 0);
+                defaultValue: "");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "Visits",
-                table: "Products");
+                name: "CommentBody",
+                table: "Comments");
         }
     }
 }

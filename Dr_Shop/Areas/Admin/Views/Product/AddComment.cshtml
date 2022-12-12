@@ -1,0 +1,50 @@
+﻿@{
+    Layout = null;
+}
+
+<div class="modal fade" id="exampleLargeModal" tabindex="-1" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">نظر جدید</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="col-12">
+                    <label class="form-label" for="inputcomment">نظر</label>
+                    <textarea class="form-control" rows="3" id="inputcomment"
+                              placeholder="نظر خود را وارد کنید ..."></textarea>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-3"><label class="modal-title" for="adv">نقاط قوت محصول</label></div>
+                    <div class="col-3">
+                        <div class="form-control bootstrap-tagsinput" id="adv">
+                            <input type="text" class="visually-hidden" data-role="tagsinput">
+                        </div>
+                    </div>
+                    <div class="col-3"><label class="modal-title" for="disadv">نقاط ضعف محصول</label></div>
+                    <div class="col-3">
+                        <div class="form-control bootstrap-tagsinput" id="disadv">
+                            <input type="text" class="visually-hidden" data-role="tagsinput">
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-2">
+                        <label class="form-label" for="productpoint">امتیاز محصول</label>
+                    </div>
+                    <div class="col-4"><input type="number" step="1" min="0" max="5" placeholder="امتیاز محصول" class="form-control" id="productpoint"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">بستن</button>
+                <button type="button" class="btn btn-success" id="btnAddComment">
+                    افزودن نظر
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+

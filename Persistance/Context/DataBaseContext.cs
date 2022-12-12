@@ -57,7 +57,8 @@ namespace Persistance.Context
         public DbSet<ProductTag> ProductTags { get; set; }
         public DbSet<ProductToTag> ProductToTags { get; set; }
 
-
+        public DbSet<Comment> Comments { get; set; }
+        public DbSet<Comment_FeedBack> comment_FeedBacks { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -68,6 +69,8 @@ namespace Persistance.Context
             new ProductFeatureConfig().Configure(modelBuilder.Entity<ProductFeature>()); // Config for ProductFeature
             new ProductTagConfig().Configure(modelBuilder.Entity<ProductTag>()); // Config for ProductTag
             new ProductToTagConfig().Configure(modelBuilder.Entity<ProductToTag>()); // Config for ProductToTag (Just connect tag and product together)
+            new CommentConfig().Configure(modelBuilder.Entity<Comment>()); // Config for Comment 
+            new Comment_FeedBackConfig().Configure(modelBuilder.Entity<Comment_FeedBack>()); // Config for Comment_FeedBack 
         }
     }
 }

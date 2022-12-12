@@ -13,6 +13,8 @@ namespace Application.Interfaces
         DbSet<ProductFeature> ProductFeatures { get; set; }
         DbSet<ProductTag> ProductTags { get; set; }
         DbSet<ProductToTag> ProductToTags { get; set; }
+        DbSet<Comment> Comments { get; set; }
+        DbSet<Comment_FeedBack> comment_FeedBacks { get; set; }
 
         int SaveChanges(bool acceptAllChangesOnSuccess);
         int SaveChanges();
