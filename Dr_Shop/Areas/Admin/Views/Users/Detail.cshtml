@@ -1,0 +1,45 @@
+﻿@model UserDto
+
+<div class="row">
+	<div class="col-lg-4">
+		<div class="card">
+			<div class="card-body">
+				<div class="d-flex flex-column align-items-center text-center">
+					<img src="~/AdminAssets/images/avatars/guest.png" alt="Admin" class="rounded-circle p-1 bg-primary" width="110">
+					<div class="mt-3">
+						<h4>@Model.Username</h4>
+						<p class="text-secondary mb-1">نقش کاربر در سایت</p>
+						<p class="text-muted font-size-sm">@Model.Role</p>
+						<a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model.UserId">ویرایش</a>
+						<a class="btn btn-outline-primary" src="mailto:@Model.Email">پیام</a>
+					</div>
+				</div>
+
+
+			</div>
+		</div>
+	</div>
+	<div class="col-lg-8">
+		<div class="card">
+			<div class="card-body">
+				<div class="row mb-3">
+					<div class="col-sm-3">
+						<h6 class="mb-0">نام کامل</h6>
+					</div>
+					<div class="col-sm-9 text-secondary">
+						<label class="form-control">@Model.Username</label>
+					</div>
+				</div>
+				<div class="row mb-3">
+					<div class="col-sm-3">
+						<h6 class="mb-0">ایمیل</h6>
+					</div>
+					<div class="col-sm-9 text-secondary">
+						<label class="form-control">@Model.Email</label>
+					</div>
+				</div>		
+			</div>
+		</div>
+
+	</div>
+</div>

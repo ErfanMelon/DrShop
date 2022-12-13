@@ -32,6 +32,7 @@
                         <td>@item.Email</td>
                         <td>@item.Role</td>
                         <td>
+                            <a class="btn btn-outline-info px-5" asp-action="Detail" asp-route-id="@item.UserId"><i class="bx bx-message-square-detail mr-1"></i></a>
                             <a class="btn btn-outline-primary px-5" asp-action="Edit" asp-route-id="@item.UserId"><i class="bx bx-edit mr-1"></i></a>
                             <button class="btn btn-outline-primary px-5" onclick="DeleteUser('@item.UserId')"><i class="bx bx-trash mr-1"></i></button>
                             <a id="deleteurl" asp-action="Delete" asp-controller="Users" role="link" aria-disabled="true"></a>

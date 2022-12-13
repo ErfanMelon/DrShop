@@ -163,7 +163,7 @@
 										<button type="button" class="btn btn-danger" onclick="DeleteComment('@item.CommentId')">
 											<i class="bx bx-trash me-0"></i>
 										</button>
-										<a class="btn btn-info">
+										<a class="btn btn-info" asp-action="Detail" asp-controller="Users" asp-route-id="@item.UserId">
 											<i class="bx bx-detail me-0"></i>
 										</a>
 									</div>

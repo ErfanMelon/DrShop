@@ -118,5 +118,10 @@ namespace Dr_Shop.Areas.Admin.Controllers
                 Value = ((int)e).ToString()
             }), "Value", "Text");
         }
+        public async Task<IActionResult> Detail(int id)
+        {
+            var result = await _mediator.Send(new RequestGetUser(id));
+            return View(result.Data);
+        }
     }
 }
