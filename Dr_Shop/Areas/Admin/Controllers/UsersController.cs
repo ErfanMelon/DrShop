@@ -1,5 +1,6 @@
 ﻿using Application.Services.Account.Commands.DeleteUser;
 using Application.Services.Account.Commands.EditUser;
+using Application.Services.Account.Commands.RegisterAdmin;
 using Application.Services.Account.Commands.RegisterUser;
 using Application.Services.Account.Queries.GetUserForEdit;
 using Application.Services.Account.Queries.GetUsers;
@@ -15,14 +16,16 @@ using static Application.Services.Account.Commands.RegisterUser.RegisterUserServ
 namespace Dr_Shop.Areas.Admin.Controllers
 {
     [Area("Admin")]
-  //  [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
     public class UsersController : Controller
     {
         private readonly IMediator _mediator;
+        private readonly IConfiguration _configuration;
 
-        public UsersController(IMediator mediator)
+        public UsersController(IMediator mediator, IConfiguration configuration)
         {
             _mediator = mediator;
+            _configuration = configuration;
         }
 
         public async Task<IActionResult> Index(string? Searchkey, int page = 1, int pagesize = 20)
@@ -122,6 +125,19 @@ namespace Dr_Shop.Areas.Admin.Controllers
         {
             var result = await _mediator.Send(new RequestGetUser(id));
             return View(result.Data);
+        }
+        [AllowAnonymous]
+        [Route("/CreateFirstAdmin")]
+        public async Task<IActionResult> AdminRegister()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                string email = _configuration["DefaultAdmin:Email"] ?? "Admin@mail.com";
+                string pass = _configuration["DefaultAdmin:Password"] ?? "12345678";
+                await _mediator.Send(new RequestRegisterAdmin(email, pass));
+                return Redirect("/Logout");
+            }
+            return Redirect("/Login");
         }
     }
 }

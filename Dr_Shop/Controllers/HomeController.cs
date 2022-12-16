@@ -11,7 +11,6 @@ namespace Dr_Shop.Controllers
         {
             _logger = logger;
         }
-
         public IActionResult Index()
         {
             return View();

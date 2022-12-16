@@ -23,7 +23,7 @@ using System.Threading.Tasks;
 namespace Dr_Shop.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    //[Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
     public class ProductController : Controller
     {
         private readonly IMediator _mediator;

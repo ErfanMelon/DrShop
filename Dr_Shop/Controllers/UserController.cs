@@ -104,7 +104,7 @@ namespace Dr_Shop.Controllers
             AuthenticationProperties properties = new AuthenticationProperties
             {
                 IsPersistent = true,
-                ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(10),
+                ExpiresUtc = DateTimeOffset.UtcNow.AddMonths(1),
             };
             await HttpContext.SignInAsync(claimsPrincipal, properties);
         }
