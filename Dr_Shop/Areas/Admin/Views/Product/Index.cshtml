@@ -79,13 +79,16 @@
 						</div>
 						<div class="d-flex align-items-center mt-3 fs-6">
 							<div class="cursor-pointer">
-								<i class="bx bxs-star text-warning"></i>
-								<i class="bx bxs-star text-warning"></i>
-								<i class="bx bxs-star text-warning"></i>
-								<i class="bx bxs-star text-warning"></i>
-								<i class="bx bxs-star text-secondary"></i>
+								@for (int i = 0; i < item.Stars; i++)
+								{
+									<i class="bx bxs-star text-warning"></i>
+								}
+								@for (int i = 0; i < (5-item.Stars); i++)
+								{
+														<i class="bx bxs-star text-secondary"></i>
+								}
 							</div>
-							<p class="mb-0 ms-auto">4.2(182)</p>
+							<p class="mb-0 ms-auto">@item.Stars (-)</p>
 						</div>
 					</div>
 				</div>

@@ -3,13 +3,7 @@ using Application.Services.Product.Commands.AddProduct;
 using Application.Services.Product.Commands.EditProduct;
 using Common;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Services.Product.Queries.GetProduct
 {
@@ -46,27 +40,15 @@ namespace Application.Services.Product.Queries.GetProduct
                     {
                         Feature = e.Feature,
                         Value = e.Value
-                    }).ToList()
+                    }).ToList(),
+                    ProductSlug=product.Slug
                 };
                 return Task.FromResult(new ResultDto<RequestEditProduct>
                 {
                     Data = productDetail,
                     IsSuccess = true
                 });
-            
-            
         }
     }
     public record RequestGetProductForEdit(int productID) : IRequest<ResultDto<RequestEditProduct>>;
-    public class ProductForEditDto
-    {
-        public int ProductId { get; set; }
-        public string ProductName { get; set; }
-        public string ShortDescription { get; set; }
-        public string Description { get; set; }
-        public int Price { get; set; }
-        public int CategoryId { get; set; }
-        public List<FeatureDto> Features { get; set; }
-        public List<string> Tags { get; set; }
-    }
 }

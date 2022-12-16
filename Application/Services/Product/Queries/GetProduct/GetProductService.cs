@@ -1,5 +1,6 @@
 ﻿using Application.Interfaces;
 using Application.Services.Product.Commands.AddProduct;
+using Application.Services.Product.Queries.GetProductStars;
 using Common;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -9,10 +10,12 @@ namespace Application.Services.Product.Queries.GetProduct
     public class GetProductService : IRequestHandler<RequestGetProduct, ResultDto<ProductDetailDto>>
     {
         private readonly IDataBaseContext _context;
+        private readonly IMediator _mediator;
 
-        public GetProductService(IDataBaseContext context)
+        public GetProductService(IDataBaseContext context, IMediator mediator)
         {
             _context = context;
+            _mediator = mediator;
         }
 
         public Task<ResultDto<ProductDetailDto>> Handle(RequestGetProduct request, CancellationToken cancellationToken)
@@ -23,9 +26,9 @@ namespace Application.Services.Product.Queries.GetProduct
                 .Include(e => e.ProductTags)
                 .ThenInclude(e => e.Tag)
                 .Include(e => e.Comments)
-                .ThenInclude(e=>e.Disadvantages)
+                .ThenInclude(e => e.Disadvantages)
                 .Include(e => e.Comments)
-                .ThenInclude(e=>e.Advantages)
+                .ThenInclude(e => e.Advantages)
                 .Include(e => e.Comments)
                 .ThenInclude(e => e.User)
                 .AsNoTracking()
@@ -58,7 +61,7 @@ namespace Application.Services.Product.Queries.GetProduct
                 UserId = e.User.UserId,
                 Username = e.User.Username
             }).ToList() ?? null;
-            productDetail.Stars = product.Comments.Any()?(int)product.Comments.Average(e => e.Points) : 0;
+            productDetail.Stars = _mediator.Send(new RequestGetProductStars(request.productId)).Result;
 
             return Task.FromResult(new ResultDto<ProductDetailDto>
             {

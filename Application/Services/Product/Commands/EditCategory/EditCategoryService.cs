@@ -17,11 +17,19 @@ namespace Application.Services.Product.Commands.EditCategory
         {
             var category = _context.Categories
                 .Include(e => e.ParentCategory)
+                .Include(e=>e.SubCategories)
                 .FirstOrDefault(e => e.CategoryId == request.CategoryId);
             if (category == null)
                 new ThrowThisException(new ArgumentNullException($"Category with id {request.CategoryId} not found "), "دسته بندی پیدا نشد");
-            
-            category.ParentCategory = _context.Categories.Find(request.ParentCategory);
+
+            var parentcategory = _context.Categories
+                .Include(e => e.SubCategories)
+                .FirstOrDefault(e => e.CategoryId == request.ParentCategory);
+
+            if (parentcategory != null && category.SubCategories.Any())
+                new ThrowThisException(new ArgumentOutOfRangeException($"CategoryTree set to one branch {parentcategory.CategoryName} cannot nest with {category.CategoryName}"), "درحال حاضر افزودن دو دسته بندی تودرتو وجود ندارد");
+
+            category.ParentCategory = parentcategory;
             string oldCategoryName = category.CategoryName;
             category.CategoryName = request.CategoryName;
             await _context.SaveChangesAsync();

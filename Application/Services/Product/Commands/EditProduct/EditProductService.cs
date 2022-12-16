@@ -30,7 +30,7 @@ namespace Application.Services.Product.Commands.EditProduct
                 .Include(e => e.ProductTags)
                 .FirstOrDefault(e => e.ProductId == request.ProductId);
             EditProductValidation validationRules = new EditProductValidation(_context);
-          var isvalid=  validationRules.Validate(request);
+            var isvalid = validationRules.Validate(request);
             if (!isvalid.IsValid)
             {
                 return new ResultDto { Message = isvalid.Errors[0].ErrorMessage };
@@ -114,13 +114,14 @@ namespace Application.Services.Product.Commands.EditProduct
             RuleFor(e => e.Features).NotEmpty().WithMessage("ویژگی محصول را وارد کنید");
             RuleForEach(e => e.Features).SetValidator(new ProductFeatureDtoValidation());
             RuleForEach(e => e.Tags).NotEmpty().WithMessage("تگ را درست وارد کنید").When(e => e.Tags != null);
-            RuleFor(e => e.ProductSlug).NotEmpty().WithMessage("اسلاگ محصول را وارد کنید").Matches("^[a-z\\d](?:[a-z\\d_-]*[a-z\\d])?$").WithMessage("اسلاگ را به درستی وارد کنید").Must(UniqueSlug).WithMessage("اسلاگ از قبل موجود است");
+            RuleFor(e => e.ProductSlug).NotEmpty().WithMessage("اسلاگ محصول را وارد کنید").Matches("^[a-z\\d](?:[a-z\\d_-]*[a-z\\d])?$").WithMessage("اسلاگ را به درستی وارد کنید");
+            RuleFor(e=>e).Must(UniqueSlug).WithMessage("اسلاگ از قبل موجود است");
 
         }
 
-        private bool UniqueSlug(string arg)
+        private bool UniqueSlug(RequestEditProduct arg)
         {
-            return !_context.Products.Any(e => e.Slug == arg);
+            return !_context.Products.Any(e => e.Slug == arg.ProductSlug && e.ProductId!=arg.ProductId);
         }
         private bool ValidCategory(int arg)
         {
