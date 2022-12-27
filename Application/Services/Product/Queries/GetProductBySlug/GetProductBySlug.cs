@@ -2,11 +2,6 @@
 using Common;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Services.Product.Queries.GetProductBySlug
 {
@@ -19,10 +14,9 @@ namespace Application.Services.Product.Queries.GetProductBySlug
             _context = context;
         }
 
-        public Task<ResultDto<ResultGetProduct>> Handle(RequestGetProductBySlug request, CancellationToken cancellationToken)
+        public async Task<ResultDto<ResultGetProduct>> Handle(RequestGetProductBySlug request, CancellationToken cancellationToken)
         {
             var product = _context.Products
-                .AsNoTracking()
                 .Include(e => e.ProductImages)
                 .Include(e => e.Category)
                 .Include(e => e.ProductFeatures)
@@ -31,7 +25,9 @@ namespace Application.Services.Product.Queries.GetProductBySlug
             {
                 new ThrowThisException(new ArgumentNullException($"Product with slug {request.slug} not found"), "محصول پیدا نشد");
             }
-            return Task.FromResult(new ResultDto<ResultGetProduct>
+            product.Visits++;
+            await _context.SaveChangesAsync();
+            return new ResultDto<ResultGetProduct>
             {
                 IsSuccess = true,
                 Data = new ResultGetProduct
@@ -43,10 +39,10 @@ namespace Application.Services.Product.Queries.GetProductBySlug
                     ).ToList()),
                     Price = product.Price,
                     ProductId = product.ProductId,
-                    Image=product.ProductImages?.FirstOrDefault()?.Src??"",
-                    ProductName=product.Name
+                    Image = product.ProductImages?.FirstOrDefault()?.Src ?? "",
+                    ProductName = product.Name
                 }
-            });
+            };
 
         }
     }

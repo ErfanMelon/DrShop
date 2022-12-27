@@ -1,4 +1,5 @@
-﻿using Dr_Shop.Models.Filters;
+﻿using Application.Services.Product.Queries.GetProductForSite;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Dr_Shop.Controllers
@@ -6,14 +7,17 @@ namespace Dr_Shop.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IMediator _mediator;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IMediator mediator)
         {
             _logger = logger;
+            _mediator = mediator;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index(int productnumbers=6)
         {
-            return View();
+            var result = await _mediator.Send(new RequestGetProductSite(productnumbers));
+            return View(result);
         }
         public IActionResult Privacy()
         {
